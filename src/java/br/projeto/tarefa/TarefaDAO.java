@@ -12,7 +12,7 @@ public class TarefaDAO {
 
     public List<TarefaBean> listarTarefas() throws SQLException {
         List<TarefaBean> lista = new ArrayList<>();
-        String sql = "SELECT * FROM tarefas ORDER BY id_tarefa";
+        String sql = "SELECT * FROM tarefas ORDER BY id_tarefa DESC";
 
         try (
             Connection conn = ConnectionPool.getConexao();
@@ -32,6 +32,43 @@ public class TarefaDAO {
         }
 
         return lista;
+    }
+    
+    
+    
+    public void adicionarTarefa(TarefaBean tarefa) throws SQLException {
+
+        String sql = """
+            INSERT INTO tarefas
+                (titulo, prioridade, responsavel, status, descricao)
+            VALUES
+                (?, ?, ?, ?, ?)
+        """;
+
+        try (
+            Connection conn = ConnectionPool.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+            ps.setString(1, tarefa.getTitulo());
+            ps.setString(2, tarefa.getPrioridade());
+            ps.setString(3, tarefa.getResponsavel());
+            ps.setInt(4, tarefa.getStatus());
+            ps.setString(5, tarefa.getDescricao());
+
+            ps.executeUpdate();
+        }
+    }
+    
+    public void excluirTarefa(Integer id) throws SQLException {
+        String sql = "DELETE FROM tarefas WHERE id_tarefa = ?";
+
+        try (
+            Connection conn = ConnectionPool.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        }
     }
 
     

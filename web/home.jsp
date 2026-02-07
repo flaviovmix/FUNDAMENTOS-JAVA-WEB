@@ -88,7 +88,14 @@
                             </td>
 
                             <td class="btn-action delete">
-                                <a href="#" onclick="excluirTarefa(); return false;">
+                                <a href="#" onclick="excluirTarefa(
+                                   <%= tarefa.getId_tarefa() %>,
+                                   '<%= tarefa.getTitulo() %>',
+                                   '<%= tarefa.getPrioridade() %>',
+                                   '<%= tarefa.getResponsavel() %>',
+                                   '<%= tarefa.getStatus() %>',
+                                   '<%= (tarefa.getDescricao()) %>'
+                                 ); return false;">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>
                             </td>

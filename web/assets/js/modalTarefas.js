@@ -30,19 +30,26 @@ function closeModalTarefas() {
     }, 200);
 }
 
-function removeEstudo() {
-    const modal = document.getElementById("bgModal");
-    modal.classList.remove("bg-nova");
-    modal.classList.remove("bg-editar");
-    modal.classList.remove("bg-excluir");
+function removeEstilo() {
+    // classes remover estilo do bg
+    document.getElementById("bgModal").classList.remove("bg-nova");
+    document.getElementById("bgModal").classList.remove("bg-editar");
+    document.getElementById("bgModal").classList.remove("bg-excluir");
+    
+    // classes remover estilo do botão
+    document.getElementById("botaoConfirmacao").classList.remove("btn-excluirTarefa");
+    document.getElementById("botaoConfirmacao").classList.remove("btn-novaTarefa");
+    document.getElementById("botaoConfirmacao").classList.remove("btn-editarTarefa");
 }
 
 function novaTarefa() {
+    const ctx = document.body.dataset.context;
     document.getElementById("tituloModal").innerText = "Nova Tarefa";
     removeEstudo();
     document.getElementById("bgModal").classList.add("bg-nova");
     openModalTarefas('#nova-tarefa');
     document.getElementById("titulo").focus();
+    document.querySelector(".form-tarefa-custom").action = ctx + "/tarefas/cadastrar";
 }
 
 function editarTarefa() {
@@ -53,12 +60,26 @@ function editarTarefa() {
     document.getElementById("titulo").focus();
 }
 
-function excluirTarefa() {
+function excluirTarefa(id, titulo, prioridade, responsavel, status, descricao) {
+    const ctx = document.body.dataset.context;
     document.getElementById("tituloModal").innerText = "Excluir Tarefa";
-    removeEstudo();
+    document.getElementById("botaoConfirmacao").innerText = "Confirmar Exclusão";
+    removeEstilo();
     document.getElementById("bgModal").classList.add("bg-excluir");
-    openModalTarefas("#excluir-tarefa");
-    document.getElementById("titulo").focus();
+    document.getElementById("botaoConfirmacao").classList.add("btn-excluirTarefa");
+    openModalTarefas();
+    
+    document.getElementById("titulo").value = titulo;
+    document.getElementById("responsavel").value = responsavel;
+    document.getElementById("descricao").value = descricao;
+    document.getElementById("status").value = status;
+    
+    // prioridade (radio)
+    document.querySelectorAll('input[name="prioridade"]').forEach(r => {
+        r.checked = (r.value === prioridade);
+    });
+    
+    document.querySelector(".form-tarefa-custom").action = ctx + "/tarefas/deletar";
 }
 
 /* ==========================================================

@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="br.projeto.tarefa.TarefaBean"%>
+<%@page import="br.projeto.tarefa.TarefaDAO"%>
 <%@page import="br.root.config.ConnectionPool"%>
 <%@page import="java.sql.*" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -61,50 +64,28 @@
 
                 <tbody>
 
-                    <%  
-                    String sql = "SELECT * FROM tarefas ORDER BY id_tarefa";
-                    try {
-                        Connection con = ConnectionPool.getConexao(); 
-                        PreparedStatement ps = con.prepareStatement(sql); 
-                        ResultSet rs = ps.executeQuery();
-                            boolean temRegistro = false;
-                            while (rs.next()) { 
-                            temRegistro = true;%>
-                            <tr class="row-link">
-                                <td class="prioridade <%= rs.getString("prioridade") %>">
-                                    <a href="#00<%= rs.getInt("id_tarefa") %>" class="row-anchor"></a>
+                    <% 
+                   try {
+                        TarefaDAO dao = new TarefaDAO();
+                        List<TarefaBean> tarefas = dao.listarTarefas();
+
+                        if(tarefas.isEmpty()) {%>
+                            <tr>
+                                <td class="info" colspan="8">
+                                    Nenhuma tarefa encontrada.
                                 </td>
-                                <td><%= rs.getInt("id_tarefa") %></td>
-                                <td><%= rs.getString("titulo") %></td>
-                                <td><%= rs.getString("prioridade") %></td>
-                                <td><%= rs.getString("responsavel") %></td>
-
-                                <% int status = rs.getInt("status");
-                                    String statusTexto;
-
-                                    switch (status) {
-                                        case 0:
-                                            statusTexto = "inativo";
-                                            break;
-                                        case 1:
-                                            statusTexto = "ativo";
-                                            break;
-                                        case 2:
-                                            statusTexto = "rascunho";
-                                            break;
-                                        case 3:
-                                            statusTexto = "pendente";
-                                            break;
-                                        case 4:
-                                            statusTexto = "excluído";
-                                            break;
-                                        default:
-                                            statusTexto = "desconhecido";
-                                            break;
-                                    }
-                                %>
-
-                                <td><%= statusTexto %></td>
+                            </tr>
+                        <% }
+                            for (TarefaBean tarefa : tarefas) { %>
+                            <tr class="row-link">
+                                <td class="prioridade <%= tarefa.getPrioridade() %>">
+                                    <a href="#00<%= tarefa.getId_tarefa() %>" class="row-anchor"></a>
+                                </td>
+                                <td><%= tarefa.getId_tarefa() %></td>
+                                <td><%= tarefa.getTitulo() %></td>
+                                <td><%= tarefa.getPrioridade() %></td>
+                                <td><%= tarefa.getResponsavel() %></td>
+                                <td><%= tarefa.getStatusText()%></td>
 
                                 <td class="btn-action edit">
                                     <a href="#" onclick="editarTarefa(); return false;">
@@ -119,24 +100,17 @@
                                 </td>
 
                             </tr>
-
-                            <% } 
-                            if (!temRegistro) { %>
-                                <tr>
-                                    <td class="info" colspan="8">
-                                        Nenhuma tarefa encontrada.
-                                    </td>
-                                </tr>
-                            <% }
-
-                            } catch (Exception e) { 
-                                System.out.println("Erro: " + e.getMessage());%>
-                                <tr>
-                                    <td class="erro" colspan="8">
-                                        Algum erro inesperado aconteceu.
-                                    </td>
-                                </tr>
-                           <% } %>
+                              
+                                <% }
+                            } catch (Exception e) {
+                                 e.printStackTrace(); %>
+                                 <tr>
+                                     <td class="erro" colspan="8">
+                                         Algum erro inesperado aconteceu.
+                                     </td>
+                                 </tr>
+                             <% }
+                         %>
                     
                 </tbody>
             </table>

@@ -13,6 +13,18 @@ function openModalTarefas(hash) {
     }
 }
 
+function setCamposHabilitados(habilitar) {
+    document.getElementById("titulo").disabled = !habilitar;
+    document.getElementById("responsavel").disabled = !habilitar;
+    document.getElementById("descricao").disabled = !habilitar;
+    document.getElementById("data_criacao").disabled = !habilitar; 
+    document.getElementById("status").disabled = !habilitar;
+
+    document.querySelectorAll('input[name="prioridade"]').forEach(r => {
+        r.disabled = !habilitar;
+    });
+}
+
 function closeModalTarefas() {
     const overlay = document.getElementById('modalTarefas');
     const modal  = document.getElementById('bgModal');
@@ -43,32 +55,53 @@ function removeEstilo() {
 }
 
 function novaTarefa() {
+    setCamposHabilitados(true);
     const ctx = document.body.dataset.context;
     document.getElementById("tituloModal").innerText = "Nova Tarefa";
-    removeEstudo();
+    document.getElementById("botaoConfirmacao").innerText = "Salvar Registro";
+    removeEstilo();
     document.getElementById("bgModal").classList.add("bg-nova");
     openModalTarefas('#nova-tarefa');
     document.getElementById("titulo").focus();
     document.querySelector(".form-tarefa-custom").action = ctx + "/tarefas/cadastrar";
 }
 
-function editarTarefa() {
+function editarTarefa(id, titulo, prioridade, responsavel, status, descricao) {
+    setCamposHabilitados(true);
+    const ctx = document.body.dataset.context;
     document.getElementById("tituloModal").innerText = "Editar Tarefa";
-    removeEstudo();
+    document.getElementById("botaoConfirmacao").innerText = "Editar Registro";
+    removeEstilo();
     document.getElementById("bgModal").classList.add("bg-editar");
     openModalTarefas("#editar-tarefa");
+    
+    document.getElementById("id_tarefa").value = id;
+    document.getElementById("titulo").value = titulo;
+    document.getElementById("responsavel").value = responsavel;
+    document.getElementById("descricao").value = descricao;
+    document.getElementById("status").value = status;
+    
+    // prioridade (radio)
+    document.querySelectorAll('input[name="prioridade"]').forEach(r => {
+        r.checked = (r.value === prioridade);
+    });
+    
     document.getElementById("titulo").focus();
+    document.querySelector(".form-tarefa-custom").action = ctx + "/tarefas/editar";
 }
 
 function excluirTarefa(id, titulo, prioridade, responsavel, status, descricao) {
+    setCamposHabilitados(false);
+    
     const ctx = document.body.dataset.context;
     document.getElementById("tituloModal").innerText = "Excluir Tarefa";
     document.getElementById("botaoConfirmacao").innerText = "Confirmar Exclusão";
     removeEstilo();
     document.getElementById("bgModal").classList.add("bg-excluir");
     document.getElementById("botaoConfirmacao").classList.add("btn-excluirTarefa");
-    openModalTarefas();
+    openModalTarefas("#excluir-tarefa");
     
+    document.getElementById("id_tarefa").value = id;
     document.getElementById("titulo").value = titulo;
     document.getElementById("responsavel").value = responsavel;
     document.getElementById("descricao").value = descricao;

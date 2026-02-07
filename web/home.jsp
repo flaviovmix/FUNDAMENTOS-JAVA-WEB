@@ -67,9 +67,17 @@
                 </thead>
 
                 <tbody>
-                    
-                    <% 
+                     
+                    <%
+                    try {
                         List<TarefaBean> tarefas = (List<TarefaBean>) request.getAttribute("tarefas");
+                        if(tarefas.isEmpty()) {%>
+                            <tr>
+                                <td class="info" colspan="8">
+                                    Nenhuma tarefa encontrada.
+                                </td>
+                            </tr>
+                        <% }
                         for (TarefaBean tarefa : tarefas) { %>
                         <tr class="row-link">
                             <td class="prioridade <%= tarefa.getPrioridade() %>">
@@ -82,7 +90,14 @@
                             <td><%= tarefa.getStatusText()%></td>
 
                             <td class="btn-action edit">
-                                <a href="#" onclick="editarTarefa(); return false;">
+                                <a href="#" onclick="editarTarefa(
+                                   <%= tarefa.getId_tarefa() %>,
+                                   '<%= tarefa.getTitulo() %>',
+                                   '<%= tarefa.getPrioridade() %>',
+                                   '<%= tarefa.getResponsavel() %>',
+                                   '<%= tarefa.getStatus() %>',
+                                   '<%= (tarefa.getDescricao()) %>'
+                                 ); return false;">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
                             </td>
@@ -100,9 +115,19 @@
                                 </a>
                             </td>
 
-                        </tr>
-                    <% } %>
-
+                         </tr>
+                              
+                                <% }
+                            } catch (Exception e) {
+                                 e.printStackTrace(); %>
+                                 <tr>
+                                     <td class="erro" colspan="8">
+                                         Algum erro inesperado aconteceu.
+                                     </td>
+                                 </tr>
+                             <% }
+                         %>
+                    
                 </tbody>
             </table>
 

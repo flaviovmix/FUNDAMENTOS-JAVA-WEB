@@ -22,16 +22,10 @@ public class TarefaListarServlet extends HttpServlet {
         try {
             TarefaDAO dao = new TarefaDAO();
             List<TarefaBean> tarefas = dao.listarTarefas();
-
             request.setAttribute("tarefas", tarefas);
-            request.getRequestDispatcher("/home.jsp").forward(request, response);
-            
         } catch (SQLException e) {
             log("Erro ao acessar o banco de dados", e);
-            request.getRequestDispatcher("/home.jsp").forward(request, response);
-
         } 
+        request.getRequestDispatcher("/home.jsp").forward(request, response);
     }
 }
-
-//response.sendRedirect(request.getContextPath() + "/tarefas");

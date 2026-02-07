@@ -5,7 +5,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,15 +19,14 @@ public class TarefaDeletarServlet extends HttpServlet {
     ) throws ServletException, IOException {
 
         try {
-            String idStr = request.getParameter("id_tarefa");
-            int id = Integer.parseInt(idStr);
-
+            int id = Integer.parseInt(request.getParameter("id_tarefa"));
             TarefaDAO dao = new TarefaDAO();
             dao.excluirTarefa(id);
-            
-            response.sendRedirect(request.getContextPath() + "/tarefas");
+
         } catch (SQLException e) {
-            log("Erro", e);
+            log("Erro ao excluir tarefa", e);
         }
+
+        response.sendRedirect(request.getContextPath() + "/tarefas/listar");
     }
 }

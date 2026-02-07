@@ -34,8 +34,6 @@ public class TarefaDAO {
         return lista;
     }
     
-    
-    
     public void adicionarTarefa(TarefaBean tarefa) throws SQLException {
 
         String sql = """
@@ -58,6 +56,30 @@ public class TarefaDAO {
             ps.executeUpdate();
         }
     }
+    
+
+    public void editarTarefa(TarefaBean tarefa) throws SQLException {
+        String sql = """
+            UPDATE tarefas
+            SET titulo = ?, prioridade = ?, responsavel = ?, status = ?, descricao = ?
+            WHERE id_tarefa = ?
+        """;
+
+        try (
+            Connection conn = ConnectionPool.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+            ps.setString(1, tarefa.getTitulo());
+            ps.setString(2, tarefa.getPrioridade());
+            ps.setString(3, tarefa.getResponsavel());
+            ps.setInt(4, tarefa.getStatus());
+            ps.setString(5, tarefa.getDescricao());
+            ps.setInt(6, tarefa.getId_tarefa());
+
+            ps.executeUpdate();
+        }
+    }
+
     
     public void excluirTarefa(Integer id) throws SQLException {
         String sql = "DELETE FROM tarefas WHERE id_tarefa = ?";

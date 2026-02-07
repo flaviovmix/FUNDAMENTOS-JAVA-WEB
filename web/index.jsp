@@ -1,3 +1,4 @@
+<%@page import="java.sql.*" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -59,215 +60,104 @@
 
                 <tbody>
 
-                    <tr class="row-link">
-                        <td class="prioridade alta">
-                            <a href="#001" class="row-anchor"></a>
-                        </td>
-                        <td>1</td>
-                        <td>Criar a Interface</td>
-                        <td>alta</td>
-                        <td>Steve Jobs</td>
-                        <td>ativo</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    <%  
+                        Connection conexao = null;
+                        PreparedStatement preparacao = null;
+                        ResultSet resultado = null;
 
-                    <tr class="row-link">
-                        <td class="prioridade media">
-                            <a href="#002" class="row-anchor"></a>
-                        </td>
-                        <td>2</td>
-                        <td>Criar banco de dados</td>
-                        <td>media</td>
-                        <td>Bill Gates</td>
-                        <td>ativo</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                        try {
+                            Class.forName("org.postgresql.Driver");
+                            conexao = DriverManager.getConnection (
+                                "jdbc:postgresql://localhost:5432/DB_GENERICO",
+                                "postgres",
+                                "1234"
+                            );
 
-                    <tr class="row-link">
-                        <td class="prioridade alta">
-                            <a href="#003" class="row-anchor"></a>
-                        </td>
-                        <td>3</td>
-                        <td>Listar tarefas na interface</td>
-                        <td>alta</td>
-                        <td>Mark Zuckerberg</td>
-                        <td>ativo</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                            preparacao = conexao.prepareStatement("SELECT * FROM tarefas ORDER BY id_tarefa");
+                            resultado = preparacao.executeQuery();
+                            boolean temRegistro = false;
+                            while (resultado.next()) { 
+                                temRegistro = true;%>
+                                <tr class="row-link">
+                                    <td class="prioridade <%= resultado.getString("prioridade") %>">
+                                        <a href="#00<%= resultado.getInt("id_tarefa") %>" class="row-anchor"></a>
+                                    </td>
+                                    <td><%= resultado.getInt("id_tarefa") %></td>
+                                    <td><%= resultado.getString("titulo") %></td>
+                                    <td><%= resultado.getString("prioridade") %></td>
+                                    <td><%= resultado.getString("responsavel") %></td>
 
-                    <tr class="row-link">
-                        <td class="prioridade media">
-                            <a href="#004" class="row-anchor"></a>
-                        </td>
-                        <td>4</td>
-                        <td>Criando um Pool de Conexões...</td>
-                        <td>media</td>
-                        <td>Elon Musk</td>
-                        <td>ativo</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                    <% int status = resultado.getInt("status");
+                                        String statusTexto;
 
-                    <tr class="row-link">
-                        <td class="prioridade media">
-                            <a href="#005" class="row-anchor"></a>
-                        </td>
-                        <td>5</td>
-                        <td>Implementar Bean e DAO</td>
-                        <td>media</td>
-                        <td>Larry Page</td>
-                        <td>pendente</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                        switch (status) {
+                                            case 0:
+                                                statusTexto = "inativo";
+                                                break;
+                                            case 1:
+                                                statusTexto = "ativo";
+                                                break;
+                                            case 2:
+                                                statusTexto = "rascunho";
+                                                break;
+                                            case 3:
+                                                statusTexto = "pendente";
+                                                break;
+                                            case 4:
+                                                statusTexto = "excluído";
+                                                break;
+                                            default:
+                                                statusTexto = "desconhecido";
+                                                break;
+                                        }
+                                    %>
 
-                    <tr class="row-link">
-                        <td class="prioridade alta">
-                            <a href="#006" class="row-anchor"></a>
-                        </td>
-                        <td>6</td>
-                        <td>Tratamento de erros</td>
-                        <td>alta</td>
-                        <td>Jeff Bezos</td>
-                        <td>ativo</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                    <td><%= statusTexto %></td>
 
-                    <tr class="row-link">
-                        <td class="prioridade media">
-                            <a href="#007" class="row-anchor"></a>
-                        </td>
-                        <td>7</td>
-                        <td>Deletar uma tarefa</td>
-                        <td>media</td>
-                        <td>Sergey Brin</td>
-                        <td>rascunho</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                    <td class="btn-action edit">
+                                        <a href="#" onclick="editarTarefa(); return false;">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    </td>
 
-                    <tr class="row-link">
-                        <td class="prioridade alta">
-                            <a href="#008" class="row-anchor"></a>
-                        </td>
-                        <td>8</td>
-                        <td>Resolver o problema de CSS</td>
-                        <td>alta</td>
-                        <td>Tim Cook</td>
-                        <td>ativo</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                    <td class="btn-action delete">
+                                        <a href="#" onclick="excluirTarefa(); return false;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </td>
 
-                    <tr class="row-link">
-                        <td class="prioridade baixa">
-                            <a href="#009" class="row-anchor"></a>
-                        </td>
-                        <td>9</td>
-                        <td>Editar tarefa</td>
-                        <td>baixa</td>
-                        <td>Sundar Pichai</td>
-                        <td>excluido</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                </tr>
 
-                    <tr class="row-link">
-                        <td class="prioridade baixa">
-                            <a href="#010" class="row-anchor"></a>
-                        </td>
-                        <td>10</td>
-                        <td>Desativar tarefa</td>
-                        <td>baixa</td>
-                        <td>Satya Nadella</td>
-                        <td>excluido</td>
-                        <td class="btn-action edit">
-                            <a href="#" onclick="editarTarefa(); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                        <td class="btn-action delete">
-                            <a href="#" onclick="excluirTarefa(); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                <% } 
+                                if (!temRegistro) { %>
+                                    <tr>
+                                        <td class="info" colspan="8">
+                                            Nenhuma tarefa encontrada.
+                                        </td>
+                                    </tr>
+                                <% }
+
+                                } catch (Exception e) { 
+                                    System.out.println("Erro: " + e.getMessage());%>
+                                    <tr>
+                                        <td class="erro" colspan="8">
+                                            Algum erro inesperado aconteceu.
+                                        </td>
+                                    </tr>
+                               <%}
+                                finally {
+                                    if (resultado != null) {
+                                        resultado.close();
+                                    } 
+                                    if (preparacao != null) {
+                                        preparacao.close();
+                                    } 
+                                    if (conexao != null) {
+                                        conexao.close();
+                                    } 
+                                }
+                           %>
+                    
                 </tbody>
             </table>
 

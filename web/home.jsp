@@ -6,6 +6,18 @@
 <%@page import="br.root.config.ConnectionPool"%>
 <%@page import="java.sql.*" %>
 
+<%! 
+  private String js(String s) {
+    if (s == null) return "";
+    return s
+      .replace("\\", "\\\\")
+      .replace("'", "\\'")
+      .replace("\"", "\\\"")
+      .replace("\r", "")
+      .replace("\n", "\\n");
+  }
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,10 +34,20 @@
 
         <header>
             <div class="header-inner">
-                <button class="btn-add" onclick="novaTarefa()">
-                    <i class="fa-solid fa-plus"></i>
-                    Nova Tarefa
-                </button>
+                <div class="btn-header">
+                    <button class="btn-add" onclick="novaTarefa()">
+                        <i class="fa-solid fa-plus"></i>
+                        Nova Tarefa
+                    </button>
+                    <a class="btn-reset" href="${pageContext.request.contextPath}/tarefas/reset">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        Resetar Tabela
+                    </a>
+                    <a class="btn-apagar" href="${pageContext.request.contextPath}/tarefas/apagar">
+                        <i class="fa-solid fa-trash"></i>
+                        Apagar todos os registros
+                    </a>
+                </div>
                 <h2>FUNDAMENTOS JAVA 25</h2>
             </div>
         </header>
@@ -81,7 +103,7 @@
                         for (TarefaBean tarefa : tarefas) { %>
                         <tr class="row-link">
                             <td class="prioridade <%= tarefa.getPrioridade() %>">
-                                <a href="#00<%= tarefa.getId_tarefa() %>" class="row-anchor"></a>
+                                <a href="${pageContext.request.contextPath}/form.html" class="row-anchor"></a>
                             </td>
                             <td><%= tarefa.getId_tarefa() %></td>
                             <td><%= tarefa.getTitulo() %></td>
@@ -103,16 +125,9 @@
                             </td>
 
                             <td class="btn-action delete">
-                                <a href="#" onclick="excluirTarefa(
-                                   <%= tarefa.getId_tarefa() %>,
-                                   '<%= tarefa.getTitulo() %>',
-                                   '<%= tarefa.getPrioridade() %>',
-                                   '<%= tarefa.getResponsavel() %>',
-                                   '<%= tarefa.getStatus() %>',
-                                   '<%= (tarefa.getDescricao()) %>'
-                                 ); return false;">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
+                              <a href="${pageContext.request.contextPath}/tarefas/confirmar-exclusao?id=<%= tarefa.getId_tarefa() %>">
+                                <i class="fa-solid fa-trash"></i>
+                              </a>
                             </td>
 
                          </tr>
@@ -242,10 +257,26 @@
 
                 </div>
             </div>
-
-
             <!--FIM DO MODAL-->
 
             <script src="${pageContext.request.contextPath}/assets/js/modalTarefas.js"></script>
+            
+<%
+  TarefaBean tarefaExcluir = (TarefaBean) request.getAttribute("tarefaExcluir");
+  if (tarefaExcluir != null) {
+%>
+<script>
+  excluirTarefa(
+    <%= tarefaExcluir.getId_tarefa() %>,
+    '<%= js(tarefaExcluir.getTitulo()) %>',
+    '<%= js(tarefaExcluir.getPrioridade()) %>',
+    '<%= js(tarefaExcluir.getResponsavel()) %>',
+    '<%= tarefaExcluir.getStatus() %>',
+    '<%= js(tarefaExcluir.getDescricao()) %>'
+  );
+</script>
+<%
+  }
+%>
     </body>
 </html>

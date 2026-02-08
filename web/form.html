@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Detalhes da Tarefa</title>
+
+        <!-- Fonte Inter (mais confiável que @import) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="./assets/css/paginacao.css">
+
+        <style>
+            /* =======================================================================
+               BASE
+               ======================================================================= */
+            body {
+                font-family: 'Inter', sans-serif;
+                margin: 0;
+                padding: 0;
+                background: #fafafa;
+                color: #222;
+                padding-bottom: 60px;
+            }
+
+            /* =======================================================================
+               HEADER (usa a tag <header>, sem classe)
+               ======================================================================= */
+            header {
+                width: 100%;
+                background: #1f2937;
+            }
+
+            .header-inner {
+                width: 900px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 14px 20px;
+                color: #fff;
+            }
+
+            .btn-header {
+                display: flex;
+                gap: 15px;
+            }
+
+            header h2 {
+                margin: 0;
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            .btn-add, .btn-reset {
+                color: #fff;
+                border: none;
+                padding: 8px 14px;
+                border-radius: 6px;
+                font-size: 14px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .btn-add {
+                background: #22c55e;
+            }
+            .btn-reset {
+                background: #f97316;
+            }
+
+            .btn-add:hover {
+                background: #16a34a;
+            }
+
+            /* =======================================================================
+               MAIN
+               ======================================================================= */
+            main {
+                width: 900px;
+                margin: 0 auto;
+            }
+
+            main h1 {
+                margin: 34px 0 22px 0;
+                font-size: 20px;
+                font-weight: 600;
+                color: #1f2937;
+            }
+
+            /* =======================================================================
+               TABLE
+               ======================================================================= */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                background: #fff;
+            }
+
+            th, td {
+                border-bottom: 1px solid #ccc;
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            th {
+                border-bottom: 2px solid #000;
+                background: #f5f5f5;
+                text-align: left;
+            }
+
+            .task-table tbody tr:last-child td {
+                border-bottom: 2px solid #000;
+            }
+
+            /* =======================================================================
+               LINKS
+               ======================================================================= */
+            .task-table td a {
+                color: #111;
+                text-decoration: none;
+            }
+
+            .task-table td a:hover {
+                text-decoration: underline;
+            }
+
+            /* =======================================================================
+               PRIORIDADE
+               ======================================================================= */
+            .prioridade,
+            tr > th:first-child {
+                padding: 0 !important;
+                width: 15px;
+            }
+
+            .alta  {
+                background-color: #fca5a5;
+            }
+            .media {
+                background-color: #93c5fd;
+            }
+            .baixa {
+                background-color: #86efac;
+            }
+
+            /* =======================================================================
+               AÇÕES
+               ======================================================================= */
+            .task-table .btn-action {
+                text-align: center;
+            }
+
+            .btn-action {
+                position: relative;
+                z-index: 2;
+            }
+
+            .task-table .btn-action a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .task-table .btn-action.edit a:hover {
+                color: #2563eb;
+            }
+            .task-table .btn-action.delete a:hover {
+                color: #dc2626;
+            }
+
+            /* =======================================================================
+               LINHA CLICÁVEL
+               ======================================================================= */
+            .row-link {
+                position: relative;
+            }
+            .cell-link {
+                position: relative;
+            }
+
+            .row-anchor {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                display: block;
+                text-indent: -9999px;
+            }
+
+            .row-link:hover {
+                background: #f1f5f9;
+                cursor: pointer;
+            }
+
+            /* =======================================================================
+               ALERTAS
+               ======================================================================= */
+            .erro {
+                text-align: center;
+                font-weight: bold;
+                color: #c00;
+                background-color: #ffe5e5;
+            }
+
+            .info {
+                text-align: center;
+                font-weight: bold;
+                color: #055160;
+                background-color: #e7f3f7;
+            }
+
+            /* =======================================================================
+               FOOTER FIXO
+               ======================================================================= */
+            .footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: #1f2937;
+            }
+
+            .footer-inner {
+                width: 900px;
+                margin: 0 auto;
+                padding: 0 20px;
+                color: #fff;
+                font-size: 13px;
+                text-align: center;
+            }
+
+            /* =======================================================================
+               PAGE HEADER + BADGES
+               ======================================================================= */
+            .legenda-prioridade {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                font-size: 12px;
+                color: #666;
+            }
+
+            .legenda-label {
+                margin-bottom: 4px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .legenda-badges {
+                display: flex;
+                overflow: hidden;
+                border-radius: 2px;
+                min-width: 150px;
+            }
+
+            .badge {
+                padding: 4px 10px;
+                font-size: 12px;
+                min-width: 50px;
+                text-align: center;
+                text-transform: lowercase;
+            }
+
+            .page-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* =======================================================================
+               EXTRA (DETALHE) - mantendo identidade visual do seu CSS
+               ======================================================================= */
+            .box-detalhe {
+                background: #fff;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 18px;
+                margin: 14px 0 22px;
+            }
+
+            .box-detalhe h3 {
+                margin: 0 0 14px 0;
+                font-size: 16px;
+                color: #1f2937;
+            }
+
+            .form-detalhe{
+                display: grid;
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                gap: 14px;
+            }
+
+            .grupo {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .grupo label {
+                font-size: 12px;
+                color: #666;
+                font-weight: 600;
+            }
+
+            .grupo input,
+            .grupo textarea,
+            .grupo select {
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                padding: 10px 12px;
+                font-size: 14px;
+                background: #f9fafb;
+                color: #111;
+                outline: none;
+            }
+
+            .grupo textarea {
+                resize: vertical;
+                min-height: 90px;
+            }
+            .span-2 {
+                grid-column: span 2;
+            }
+            .span-3 {
+                grid-column: span 3;
+            }
+            .span-4 {
+                grid-column: 1 / -1;
+            }
+
+            .acoes {
+                display: flex;
+                gap: 12px;
+                margin-top: 14px;
+                flex-wrap: wrap;
+            }
+
+            .sub-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 8px 0 10px;
+            }
+
+            .sub-header h2 {
+                margin: 0;
+                font-size: 16px;
+                color: #1f2937;
+                font-weight: 700;
+            }
+
+            .mini-form {
+                background: #fff;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 16px;
+                margin-top: 16px;
+            }
+
+            .mini-form h3 {
+                margin: 0 0 12px 0;
+                font-size: 14px;
+                color: #1f2937;
+            }
+
+            /* =========================================================
+               DETALHES: layout igual ao da imagem (Descrição à direita)
+               (só afeta o form dentro de .box-detalhe)
+               ========================================================= */
+            .box-detalhe .form-detalhe{
+                display: grid;
+                grid-template-columns: 2fr 1fr 1fr 3fr; /* esquerda (3 col) + direita (descrição) */
+                gap: 14px;
+                align-items: start;
+            }
+
+            /* 1) Título (linha 1, esquerda, ocupa 3 colunas) */
+            .box-detalhe .form-detalhe > .grupo:nth-child(1){
+                grid-column: 1 / 4 !important;
+                grid-row: 1 !important;
+            }
+
+            /* 3) Responsável (linha 2, esquerda, ocupa 2 colunas) */
+            .box-detalhe .form-detalhe > .grupo:nth-child(3){
+                grid-column: 1 / 3 !important;
+                grid-row: 2 !important;
+            }
+
+            /* 4) Prioridade (linha 2, esquerda, última coluna da esquerda) */
+            .box-detalhe .form-detalhe > .grupo:nth-child(4){
+                grid-column: 3 / 4 !important;
+                grid-row: 2 !important;
+            }
+
+            /* 5) Data de Criação (linha 3, esquerda, col 1) */
+            .box-detalhe .form-detalhe > .grupo:nth-child(5){
+                grid-column: 1 / 2 !important;
+                grid-row: 3 !important;
+            }
+
+            /* 6) Data de Conclusão (linha 3, esquerda, col 2) */
+            .box-detalhe .form-detalhe > .grupo:nth-child(6){
+                grid-column: 2 / 3 !important;
+                grid-row: 3 !important;
+            }
+
+            /* 2) Status (linha 3, esquerda, col 3) */
+            .box-detalhe .form-detalhe > .grupo:nth-child(2){
+                grid-column: 3 / 4 !important;
+                grid-row: 3 !important;
+            }
+
+            /* 7) Descrição (direita, ocupa a coluna 4 e “desce” as 3 linhas) */
+            .box-detalhe .form-detalhe > .grupo:nth-child(7){
+                grid-column: 4 / 5 !important;
+                grid-row: 1 / 4 !important;
+                align-self: stretch;
+            }
+
+            /* Faz a textarea realmente preencher a “coluna da direita” */
+            .box-detalhe .form-detalhe > .grupo:nth-child(7) textarea{
+                height: 100%;
+                min-height: 190px;  /* ajuste fino se quiser mais alto/baixo */
+                resize: vertical;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <div class="header-inner">
+                <div class="btn-header">
+                    <button class="btn-reset" type="button" onclick="alert('voltar')">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Voltar
+                    </button>
+
+                    <button class="btn-add" type="button" onclick="alert('editar (abrir modal)')">
+                        <i class="fa-solid fa-pen"></i>
+                        Editar
+                    </button>
+
+                    <button class="btn-reset" type="button" onclick="alert('excluir')">
+                        <i class="fa-solid fa-trash"></i>
+                        Excluir
+                    </button>
+                </div>
+
+                <h2>FUNDAMENTOS JAVA 25</h2>
+            </div>
+        </header>
+
+        <main>
+
+            <div class="page-header">
+                <h1>DETALHES DA TAREFA</h1>
+
+                <div class="legenda-prioridade">
+                    <span class="legenda-label">níveis de prioridade</span>
+                    <div class="legenda-badges">
+                        <span class="badge baixa">baixa</span>
+                        <span class="badge media">média</span>
+                        <span class="badge alta">alta</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="box-detalhe">
+                <form class="form-detalhe">
+
+                    <!-- LINHA 1 -->
+                    <div class="grupo span-3">
+                        <label>Título</label>
+                        <input type="text" value="Criar a Interface" disabled>
+                    </div>
+
+                    <div class="grupo">
+                        <label>Status</label>
+                        <input type="text" value="ativo" disabled>
+                    </div>
+
+                    <!-- LINHA 2 -->
+                    <div class="grupo">
+                        <label>Responsável</label>
+                        <input type="text" value="Steve Jobs" disabled>
+                    </div>
+
+                    <div class="grupo">
+                        <label>Prioridade</label>
+                        <input type="text" value="alta" disabled>
+                    </div>
+
+                    <div class="grupo">
+                        <label>Data de Criação</label>
+                        <input type="date" value="2025-01-01" disabled>
+                    </div>
+
+                    <div class="grupo">
+                        <label>Data de Conclusão</label>
+                        <input type="date" disabled>
+                    </div>
+
+                    <!-- LINHA 3 -->
+                    <div class="grupo span-4">
+                        <label>Descrição</label>
+                        <textarea disabled rows="2">
+Implementar a UI base com tabela, modais e estilo consistente.
+                        </textarea>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- SUBTAREFAS -->
+            <div class="sub-header">
+                <h2>SUBTAREFAS</h2>
+            </div>
+
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Status</th>
+                        <th>Conclusão</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="row-link">
+                        <td class="prioridade media">
+                            <a href="#sub1" class="row-anchor">Abrir</a>
+                        </td>
+                        <td>1</td>
+                        <td>Montar layout do header</td>
+                        <td>ativo</td>
+                        <td>—</td>
+
+                        <td class="btn-action edit">
+                            <a href="#" onclick="alert('editar subtarefa 1'); return false;">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                        </td>
+
+                        <td class="btn-action delete">
+                            <a href="#" onclick="alert('excluir subtarefa 1'); return false;">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr class="row-link">
+                        <td class="prioridade baixa">
+                            <a href="#sub2" class="row-anchor">Abrir</a>
+                        </td>
+                        <td>2</td>
+                        <td>Criar tabela estilizada</td>
+                        <td>ativo</td>
+                        <td>—</td>
+
+                        <td class="btn-action edit">
+                            <a href="#" onclick="alert('editar subtarefa 2'); return false;">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                        </td>
+
+                        <td class="btn-action delete">
+                            <a href="#" onclick="alert('excluir subtarefa 2'); return false;">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr class="row-link">
+                        <td class="prioridade alta">
+                            <a href="#sub3" class="row-anchor">Abrir</a>
+                        </td>
+                        <td>3</td>
+                        <td>Form de adicionar subtarefa</td>
+                        <td>inativo</td>
+                        <td>2025-02-01</td>
+
+                        <td class="btn-action edit">
+                            <a href="#" onclick="alert('editar subtarefa 3'); return false;">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                        </td>
+
+                        <td class="btn-action delete">
+                            <a href="#" onclick="alert('excluir subtarefa 3'); return false;">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+<!-- PAGINAÇÃO (modelo da imagem) -->
+            <div class="task-pagination2" id="paginacao">
+
+                <button type="button" class="task2-btn" id="btnPrimeira" aria-label="Primeira página">
+                    &lt;&lt;
+                </button>
+
+                <button type="button" class="task2-btn" id="btnAnterior" aria-label="Página anterior">
+                    &lt;
+                </button>
+
+                <div class="task2-center">
+                    <select class="task2-select" id="selectPagina" aria-label="Selecionar página">
+                        <!-- exemplo estático (você pode substituir via JS/JSP) -->
+                        <option value="1">pagina 01 de 15</option>
+                        <option value="2">pagina 02 de 15</option>
+                        <option value="3">pagina 03 de 15</option>
+                    </select>
+                </div>
+
+                <button type="button" class="task2-btn" id="btnProxima" aria-label="Próxima página">
+                    &gt;
+                </button>
+
+                <button type="button" class="task2-btn" id="btnUltima" aria-label="Última página">
+                    &gt;&gt;
+                </button>
+
+            </div>
+            <!-- FIM PAGINAÇÃO -->
+
+            <!-- FORM: adicionar subtarefa -->
+            <section class="mini-form">
+                <h3>Adicionar subtarefa</h3>
+
+                <form class="form-detalhe" onsubmit="alert('salvar subtarefa'); return false;">
+
+                    <div class="grupo span-2">
+                        <label>Título</label>
+                        <input type="text" placeholder="Ex: Ajustar modal de edição" required>
+                    </div>
+
+                    <div class="grupo">
+                        <label>Status</label>
+                        <select required>
+                            <option value="">Selecione</option>
+                            <option value="0">ativo</option>
+                            <option value="1">inativo</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo">
+                        <label>Data de Conclusão</label>
+                        <input type="date">
+                    </div>
+
+                    <div class="grupo span-2">
+                        <label>Descrição</label>
+                        <textarea placeholder="Detalhes da subtarefa..."></textarea>
+                    </div>
+
+                    <div class="acoes span-2">
+                        <button class="btn-add" type="submit">
+                            <i class="fa-solid fa-plus"></i>
+                            Criar Subtarefa
+                        </button>
+
+                        <button class="btn-reset" type="reset">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            Limpar
+                        </button>
+                    </div>
+
+                </form>
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <div class="footer-inner">
+                tela de detalhes (html simples) • mantendo identidade visual do seu projeto
+            </div>
+        </footer>
+
+    </body>
+</html>

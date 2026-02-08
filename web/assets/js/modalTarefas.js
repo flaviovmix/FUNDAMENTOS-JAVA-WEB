@@ -73,6 +73,7 @@ function editarTarefa(id, titulo, prioridade, responsavel, status, descricao) {
     document.getElementById("botaoConfirmacao").innerText = "Editar Registro";
     removeEstilo();
     document.getElementById("bgModal").classList.add("bg-editar");
+    document.getElementById("botaoConfirmacao").classList.add("btn-editarTarefa");
     openModalTarefas("#editar-tarefa");
     
     document.getElementById("id_tarefa").value = id;
@@ -125,9 +126,7 @@ window.onpopstate = function () {
 };
 
 window.onload = function () {
-    if (location.hash === '#nova-tarefa')   novaTarefa();
-    if (location.hash === '#editar-tarefa') editarTarefa();
-    if (location.hash === '#excluir-tarefa') excluirTarefa();
+  if (location.hash === '#nova-tarefa') novaTarefa();
 };
 
 /* ==========================================================

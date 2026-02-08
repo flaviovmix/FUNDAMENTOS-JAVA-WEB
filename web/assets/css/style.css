@@ -32,6 +32,18 @@ header {
     color: #fff;
 }
 
+.btn-header {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-header a {
+    text-decoration: none;  /* remove sublinhado */
+    color: inherit;         /* herda a cor do pai */
+}
+
+
+
 header h2 {
     margin: 0;
     font-size: 18px;
@@ -39,8 +51,7 @@ header h2 {
 }
 
 /* botão adicionar */
-.btn-add {
-    background: #22c55e;
+.btn-add, .btn-reset, .btn-apagar {
     color: #fff;
     border: none;
     padding: 8px 14px;
@@ -50,6 +61,26 @@ header h2 {
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.btn-add {
+    background: #22c55e;
+}
+
+.btn-reset {
+    background: #f97316;
+}
+
+.btn-apagar {
+    background: #dc2626;   /* vermelho base */
+}
+
+.btn-apagar:hover {
+    background: red;  /* hover mais escuro */
+}
+
+.btn-reset:hover {
+     background: #ea580c;
 }
 
 .btn-add:hover {

@@ -1,0 +1,47 @@
+/* =======================================================================
+   TABS / GUIAS (Todos / Ativas / Inativas)
+   ======================================================================= */
+.task-tabs {
+  display: flex;
+  gap: 10px;
+  background: #fff;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.task-tab {
+  text-decoration: none;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background .15s ease, color .15s ease, transform .05s ease;
+  user-select: none;
+}
+
+.task-tab:hover {
+  background: #f1f5f9;
+}
+
+.task-tab.active {
+  background: #1f2937;
+  color: #fff;
+}
+
+.task-tab.active:hover {
+  background: #111827;
+}
+
+.task-tab:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.35);
+  outline-offset: 2px;
+}
+
+.task-tab i {
+  font-size: 14px;
+  line-height: 1;
+}

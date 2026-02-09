@@ -1,0 +1,100 @@
+/* =========================================================
+   VARIÁVEIS DE ANIMAÇÃO (padrão do projeto)
+   ========================================================= */
+
+:root{
+  --anim-fast: .18s ease;
+  --anim-normal: .22s ease;
+  --anim-slow: .35s ease;
+}
+
+/* =========================================================
+   SWAP HEADER ⇄ TABS
+   Usado em páginas com body.page-detalhe
+   ========================================================= */
+
+/* tabs fixando no topo */
+.page-detalhe .task-tabs.assumir-topo{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1200;
+
+  background: #1f2937;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+
+  opacity: 1;
+  transform: translateY(0);
+
+  transition:
+    transform var(--anim-normal),
+    opacity var(--anim-normal);
+}
+
+/* estado fora (entrada e saída usam o mesmo) */
+.page-detalhe .task-tabs.assumir-topo.entrando,
+.page-detalhe .task-tabs.assumir-topo.saindo{
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* header sumindo */
+.page-detalhe .detalhe-header.sumir{
+  transform: translateY(-110%);
+  transition: transform var(--anim-normal);
+}
+
+/* =========================================================
+   CENTRALIZAÇÃO DO CONTEÚDO DAS TABS FIXAS
+   ========================================================= */
+
+.page-detalhe .task-tabs .tabs-inner{
+  max-width: 900px;
+  width: calc(100% - 32px);
+  margin: 0 auto;
+  padding: 6px 0;
+}
+
+/* =========================================================
+   ESTILO DAS TABS QUANDO FIXAS (modo escuro)
+   ========================================================= */
+
+.page-detalhe .task-tabs.assumir-topo .task-tab{
+  color: rgba(255,255,255,.92);
+}
+
+.page-detalhe .task-tabs.assumir-topo .task-tab:hover{
+  color: #fff;
+}
+
+.page-detalhe .task-tabs.assumir-topo .task-tab.active{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.18);
+  color: #fff;
+}
+
+/* =========================================================
+   ACCORDION SUBTAREFAS
+   ========================================================= */
+
+#secaoSubtarefas{
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+
+  transition:
+    max-height var(--anim-slow),
+    opacity var(--anim-fast),
+    transform var(--anim-fast);
+
+  pointer-events: none;
+}
+
+#secaoSubtarefas.ativo{
+  max-height: 2000px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}

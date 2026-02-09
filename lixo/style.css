@@ -6,6 +6,10 @@
 /* =======================================================================
    BASE
    ======================================================================= */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -57,7 +61,10 @@ header h2 {
 /* =======================================================================
    BOTÕES
    ======================================================================= */
-.btn-add, .btn-reset, .btn-apagar {
+.btn-add,
+.btn-reset,
+.btn-apagar,
+.btn-listar {
     color: #fff;
     border: none;
     padding: 8px 14px;
@@ -72,10 +79,13 @@ header h2 {
 .btn-add { background: #22c55e; }
 .btn-reset { background: #f97316; }
 .btn-apagar { background: #dc2626; }
+.btn-listar { background: #3b82f6; }
 
 .btn-add:hover { background: #16a34a; }
 .btn-reset:hover { background: #ea580c; }
 .btn-apagar:hover { background: red; }
+.btn-listar:hover { background: #2563eb; }
+
 
 /* =======================================================================
    MAIN

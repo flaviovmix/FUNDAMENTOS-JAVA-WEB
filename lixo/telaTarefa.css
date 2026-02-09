@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* =======================================================================
+   BLOCO DETALHE DA TAREFA
+   ======================================================================= */
+
+.box-detalhe {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 18px;
+  margin: 14px 0 22px;
+}
+
+/* faixas de prioridade */
+.form-baixa { border-left: 9px solid #86efac; }
+.form-media { border-left: 9px solid #93c5fd; }
+.form-alta  { border-left: 9px solid #fca5a5; }
+
+.box-detalhe h3 {
+  margin: 0 0 14px 0;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+/* =======================================================================
+   FORM BASE
+   ======================================================================= */
+
+.form-detalhe {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.grupo label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 600;
+}
+
+.grupo input,
+.grupo textarea,
+.grupo select {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: #f9fafb;
+  color: #111;
+  outline: none;
+}
+
+.grupo textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* spans grid */
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: 1 / -1; }
+
+/* ações */
+.acoes {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-subtarefa {
+  padding: 20px 40px;
+}
+
+/* =======================================================================
+   LAYOUT DETALHE (descrição à direita)
+   ======================================================================= */
+
+.box-detalhe .form-detalhe {
+  grid-template-columns: 2fr 1.7fr 1.7fr 2.2fr;
+  align-items: start;
+}
+
+.box-detalhe .form-detalhe > .grupo:nth-child(1){
+  grid-column: 1 / 4;
+  grid-row: 1;
+}
+
+.box-detalhe .form-detalhe > .grupo:nth-child(3){
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
+
+.box-detalhe .form-detalhe > .grupo:nth-child(4){
+  grid-column: 3 / 4;
+  grid-row: 2;
+}
+
+.box-detalhe .form-detalhe > .grupo:nth-child(5){
+  grid-column: 1 / 2;
+  grid-row: 3;
+}
+
+.box-detalhe .form-detalhe > .grupo:nth-child(6){
+  grid-column: 2 / 3;
+  grid-row: 3;
+}
+
+.box-detalhe .form-detalhe > .grupo:nth-child(2){
+  grid-column: 3 / 4;
+  grid-row: 3;
+}
+
+.box-detalhe .form-detalhe > .grupo:nth-child(7){
+  grid-column: 4 / 5;
+  grid-row: 1 / 4;
+  align-self: stretch;
+}
+
+.box-detalhe .form-detalhe > .grupo:nth-child(7) textarea{
+  height: 100%;
+  min-height: 190px;
+}
+
+/* =======================================================================
+   SUBHEADER (abrir subtarefas)
+   ======================================================================= */
+
+.sub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0 10px;
+}
+
+.sub-header h2 {
+  margin: 0;
+  font-size: 16px;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+/* =======================================================================
+   MINI FORM (subtarefas)
+   ======================================================================= */
+
+.mini-form {
+  position: relative;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.mini-form h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+/* header do mini-form */
+.mini-form-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* botão X */
+.btn-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: .2s;
+}
+
+.btn-close:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* =======================================================================
+   ANIMAÇÃO ABRIR / FECHAR SUBTAREFAS
+   ======================================================================= */
+
+#secaoSubtarefas {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+
+  transition:
+    max-height .35s ease,
+    opacity .25s ease,
+    transform .25s ease;
+
+  pointer-events: none;
+}
+
+#secaoSubtarefas.ativo {
+  max-height: 2000px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* =======================================================================
+   HEADER FIXO (página detalhe)
+   ======================================================================= */
+
+.page-detalhe .detalhe-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.page-detalhe{
+  padding-top: var(--header-h, 72px);
+}
+
+.page-detalhe .detalhe-header.sumir{
+  transform: translateY(-110%);
+  transition: transform .22s ease;
+}
+
+/* scroll offset */
+.page-detalhe #sub-header{
+  scroll-margin-top: var(--header-h, 72px);
+}

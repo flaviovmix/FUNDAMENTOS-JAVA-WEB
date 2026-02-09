@@ -1,0 +1,154 @@
+/* =======================================================================
+   TABLE (base)
+   ======================================================================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  background: #fff;
+}
+
+th, td {
+  border-bottom: 1px solid #ccc;
+  padding: 15px;
+  font-size: 14px;
+}
+
+th {
+  border-bottom: 2px solid #000;
+  background: #f5f5f5;
+  text-align: left;
+}
+
+.task-table tbody tr:last-child td {
+  border-bottom: 2px solid #000;
+}
+
+/* =======================================================================
+   LINKS (tabela)
+   ======================================================================= */
+.task-table td a {
+  color: #111;
+  text-decoration: none;
+}
+
+.task-table td a:hover {
+  text-decoration: underline;
+}
+
+/* =======================================================================
+   PRIORIDADE (primeira coluna)
+   ======================================================================= */
+.prioridade,
+tr > th:first-child {
+  padding: 0 !important;
+  width: 15px;
+}
+
+.alta  { background-color: #fca5a5; }
+.media { background-color: #93c5fd; }
+.baixa { background-color: #86efac; }
+
+/* =======================================================================
+   AÇÕES (editar / excluir)
+   ======================================================================= */
+.task-table .btn-action {
+  text-align: center;
+}
+
+.btn-action {
+  position: relative;
+  z-index: 2; /* acima do overlay da linha */
+}
+
+.task-table .btn-action a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.task-table .btn-action.edit a:hover { color: #2563eb; }
+.task-table .btn-action.delete a:hover { color: #dc2626; }
+
+/* =======================================================================
+   LINHA CLICÁVEL (overlay)
+   ======================================================================= */
+.row-link {
+  position: relative;
+}
+
+.cell-link {
+  position: relative;
+}
+
+.row-anchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: block;
+  text-indent: -9999px;
+}
+
+.row-link:hover {
+  background: #f1f5f9;
+  cursor: pointer;
+}
+
+/* =======================================================================
+   ALERTAS (linha)
+   ======================================================================= */
+.erro {
+  text-align: center;
+  font-weight: bold;
+  color: #c00;
+  background-color: #ffe5e5;
+}
+
+.info {
+  text-align: center;
+  font-weight: bold;
+  color: #055160;
+  background-color: #e7f3f7;
+}
+
+/* =======================================================================
+   PAGE HEADER + BADGES (legenda da listagem)
+   ======================================================================= */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.legenda-prioridade {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 12px;
+  color: #666;
+}
+
+.legenda-label {
+  margin-bottom: 4px;
+  width: 100%;
+  text-align: center;
+}
+
+.legenda-badges {
+  display: flex;
+  overflow: hidden;
+  border-radius: 2px;
+  min-width: 150px;
+  gap: 5px;
+}
+
+.badge {
+  padding: 4px 10px;
+  font-size: 12px;
+  min-width: 50px;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: lowercase;
+}

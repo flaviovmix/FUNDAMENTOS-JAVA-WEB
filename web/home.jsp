@@ -24,10 +24,17 @@
         <meta charset="UTF-8">
         <title>Lista de Tarefas</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/paginacao.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modalTarefa.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/animacoes.css">
+        
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/buttons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/flash.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/tabs.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/table.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/paginacao.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/modal-tarefa.css">
+        
+        
     </head>
 
     <body data-context="${pageContext.request.contextPath}">
@@ -69,6 +76,43 @@
                 </div>
 
             </div>
+            
+            <!-- GUIAS / FILTRO DE TAREFAS -->
+            <div class="task-tabs">
+              <!-- Para começar: deixa "Todos" ativo -->
+                <a href="#" class="task-tab active" data-tab="todos">
+                  <i class="fa-solid fa-list"></i>
+                  Todos
+                </a>
+
+                <a href="#" class="task-tab" data-tab="ativas">
+                  <i class="fa-solid fa-circle-check"></i>
+                  Ativas
+                </a>
+
+                <a href="#" class="task-tab" data-tab="inativas">
+                  <i class="fa-solid fa-circle-pause"></i>
+                  Inativas
+                </a>
+
+                <a href="#" class="task-tab" data-tab="pendentes">
+                  <i class="fa-solid fa-hourglass-half"></i>
+                  Pendentes
+                </a>
+
+                <a href="#" class="task-tab" data-tab="rascunho">
+                  <i class="fa-solid fa-file-pen"></i>
+                  Rascunho
+                </a>
+
+                <a href="#" class="task-tab" data-tab="excluidas">
+                  <i class="fa-solid fa-trash"></i>
+                  Excluídas
+                </a>
+
+            </div>
+            <!-- FIM GUIAS -->
+
 
             <table class="task-table">
 
@@ -171,7 +215,7 @@
             </div>
             <!-- FIM PAGINAÇÃO -->
                     
-<!--MODAL-->
+            <!--MODAL-->
             <div class='overlay-custom' id='modalTarefas' style='display:none;'>
                 <div class='box-modal-custom' id='bgModal'>
 

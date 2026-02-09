@@ -9,15 +9,20 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="./assets/css/paginacao.css">
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <link rel="stylesheet" href="./assets/css/telaTarefa.css">
+        <link rel="stylesheet" href="./assets/css/base.css">
+        <link rel="stylesheet" href="./assets/css/layout.css">
+        <link rel="stylesheet" href="./assets/css/components/buttons.css">
+        <link rel="stylesheet" href="./assets/css/components/table.css">
+        <link rel="stylesheet" href="./assets/css/components/tabs.css">
+        <link rel="stylesheet" href="./assets/css/components/paginacao.css">
+        <link rel="stylesheet" href="./assets/css/components/box-detalhe.css">
+        <link rel="stylesheet" href="./assets/css/components/mini-form.css">
         
     </head>
 
-    <body>
+    <body class="page-detalhe">
 
-        <header>
+        <header class="detalhe-header">
             <div class="header-inner">
                 <div class="btn-header">
                     <a class="btn-reset" href="tarefas/listar">
@@ -34,6 +39,11 @@
                         <i class="fa-solid fa-trash"></i>
                         Excluir
                     </button>
+                    
+                    <a class="btn-listar" href="#sub-header">
+                        <i class="fa-solid fa-list"></i>
+                        Lista de subtarefas
+                    </a>
                 </div>
 
                 <h2>FUNDAMENTOS JAVA 25</h2>
@@ -55,7 +65,7 @@
                 </div>
             </div>
 
-            <section class="box-detalhe baixa" >
+            <section class="box-detalhe form-alta" >
                 <form id="form-detalhe" class="form-detalhe disabled">
 
                     <!-- LINHA 1 -->
@@ -65,8 +75,8 @@
                     </div>
 
                     <div class="grupo">
-                        <label>Status</label>
-                        <input type="text" value="ativo">
+                        <label>Data de Conclusão</label>
+                        <input type="date" >
                     </div>
 
                     <!-- LINHA 2 -->
@@ -76,21 +86,44 @@
                     </div>
 
                     <div class="grupo">
-                        <label>Prioridade</label>
-                        <input type="text" value="alta">
-                    </div>
-
-                    <div class="grupo">
                         <label>Data de Criação</label>
                         <input type="date" value="2025-01-01">
                     </div>
 
-                    <div class="grupo">
-                        <label>Data de Conclusão</label>
-                        <input type="date" >
+                    <!-- LINHA 3 -->
+
+                    <div class="grupo span-3">
+                        <label class="label-custom">Prioridade</label>
+
+                        <div class="radio-custom">
+
+                            <label class="label-custom">
+                                <input type="radio" name="prioridade" value="alta" required>
+                                Alta
+                            </label>
+
+                            <label class="label-custom">
+                                <input type="radio" name="prioridade" value="media">
+                                Média
+                            </label>
+
+                            <label class="label-custom">
+                                <input type="radio" name="prioridade" value="baixa">
+                                Baixa
+                            </label>
+
+                        </div>
                     </div>
 
-                    <!-- LINHA 3 -->
+                    <div class="grupo">
+                        <label class="label-custom" for="status">Status</label>
+                        <select id="status" name="status" required>
+                            <option value="">Selecione</option>
+                            <option value="0">ativo</option>
+                            <option value="1">inativo</option>
+                        </select>
+                    </div>
+
                     <div class="grupo span-4">
                         <label>Descrição</label>
                         <textarea disabled rows="2">
@@ -102,97 +135,178 @@
             </section>
 
             <!-- SUBTAREFAS -->
-            <div class="sub-header">
-            <h2 class="titulo-secao" onclick="toggleSubtarefas()" style="cursor:pointer; display:flex; gap:10px; align-items:center;">
-              <i id="iconeSubtarefas" class="fa-solid fa-chevron-right"></i>
-              ABRIR FORM ADICIONAR SUBTAREFAS
-            </h2>
+            <div class="sub-header" id="sub-header">
+                <h2 class="titulo-secao" onclick="toggleSubtarefas()" style="cursor:pointer; display:flex; gap:10px; align-items:center;">
+                    <i id="iconeSubtarefas" class="fa-solid fa-chevron-right"></i>
+                    ABRIR FORM ADICIONAR SUBTAREFAS
+                </h2>
             </div>
-            
-            
-           
+
+            <!-- GUIAS / FILTRO DE TAREFAS -->
+            <div class="task-tabs">
+                <!-- Para começar: deixa "Todos" ativo -->
+                <a href="#" class="task-tab active" data-tab="todos">
+                    <i class="fa-solid fa-list"></i>
+                    Todos
+                </a>
+
+                <a href="#" class="task-tab" data-tab="ativas">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Ativas
+                </a>
+
+                <a href="#" class="task-tab" data-tab="inativas">
+                    <i class="fa-solid fa-circle-pause"></i>
+                    Inativas
+                </a>
+
+                <a href="#" class="task-tab" data-tab="pendentes">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                    Pendentes
+                </a>
+
+                <a href="#" class="task-tab" data-tab="rascunho">
+                    <i class="fa-solid fa-file-pen"></i>
+                    Rascunho
+                </a>
+
+                <a href="#" class="task-tab" data-tab="excluidas">
+                    <i class="fa-solid fa-trash"></i>
+                    Excluídas
+                </a>
+
+            </div>
+            <!-- FIM GUIAS -->
+
             <table class="task-table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>ID</th>
-                        <th>Título</th>
-                        <th>Status</th>
-                        <th>Conclusão</th>
-                        <th>Editar</th>
-                        <th>Excluir</th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    <tr class="row-link">
-                        <td class="prioridade">
-                            <a href="#sub1" class="row-anchor">Abrir</a>
-                        </td>
-                        <td>1</td>
-                        <td>Montar layout do header</td>
-                        <td>ativo</td>
-                        <td>—</td>
+  <thead>
+    <tr>
+      <th></th>
+      <th>ID</th>
+      <th>Título</th>
+      <th>Prioridade</th>
+      <th>Responsável</th>
+      <th>Status</th>
+      <th class="text-center">Editar</th>
+      <th class="text-center">Excluir</th>
+    </tr>
+  </thead>
 
-                        <td class="btn-action edit">
-                            <a href="#" onclick="alert('editar subtarefa 1'); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
+  <tbody>
 
-                        <td class="btn-action delete">
-                            <a href="#" onclick="alert('excluir subtarefa 1'); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+    <!-- LINHA 1 -->
+    <tr class="row-link">
 
-                    <tr class="row-link">
-                        <td class="prioridade">
-                            <a href="#sub2" class="row-anchor">Abrir</a>
-                        </td>
-                        <td>2</td>
-                        <td>Criar tabela estilizada</td>
-                        <td>ativo</td>
-                        <td>—</td>
+      <td class="prioridade alta cell-link">
+        <a href="detalhe.html" class="row-anchor">Abrir</a>
+      </td>
 
-                        <td class="btn-action edit">
-                            <a href="#" onclick="alert('editar subtarefa 2'); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
+      <td class="cell-link">1</td>
+      <td class="cell-link">Criar interface de tarefas</td>
+      <td class="cell-link">alta</td>
+      <td class="cell-link">Steve Jobs</td>
+      <td class="cell-link">ativo</td>
 
-                        <td class="btn-action">
-                            <a href="#" onclick="alert('excluir subtarefa 2'); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+      <td class="btn-action edit text-center">
+        <a href="#">
+          <i class="fa-solid fa-pen"></i>
+        </a>
+      </td>
 
-                    <tr class="row-link">
-                        <td class="prioridade">
-                            <a href="#sub3" class="row-anchor">Abrir</a>
-                        </td>
-                        <td>3</td>
-                        <td>Form de adicionar subtarefa</td>
-                        <td>inativo</td>
-                        <td>2025-02-01</td>
+      <td class="btn-action delete text-center">
+        <a href="#">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </td>
 
-                        <td class="btn-action edit">
-                            <a href="#" onclick="alert('editar subtarefa 3'); return false;">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
+    </tr>
 
-                        <td class="btn-action delete">
-                            <a href="#" onclick="alert('excluir subtarefa 3'); return false;">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            
+    <!-- LINHA 2 -->
+    <tr class="row-link">
+
+      <td class="prioridade media cell-link">
+        <a href="detalhe.html" class="row-anchor">Abrir</a>
+      </td>
+
+      <td class="cell-link">2</td>
+      <td class="cell-link">Implementar paginação</td>
+      <td class="cell-link">média</td>
+      <td class="cell-link">Bill Gates</td>
+      <td class="cell-link">ativo</td>
+
+      <td class="btn-action edit text-center">
+        <a href="#">
+          <i class="fa-solid fa-pen"></i>
+        </a>
+      </td>
+
+      <td class="btn-action delete text-center">
+        <a href="#">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </td>
+
+    </tr>
+
+    <!-- LINHA 3 -->
+    <tr class="row-link">
+
+      <td class="prioridade baixa cell-link">
+        <a href="detalhe.html" class="row-anchor">Abrir</a>
+      </td>
+
+      <td class="cell-link">3</td>
+      <td class="cell-link">Ajustar modal de edição</td>
+      <td class="cell-link">baixa</td>
+      <td class="cell-link">Ada Lovelace</td>
+      <td class="cell-link">inativo</td>
+
+      <td class="btn-action edit text-center">
+        <a href="#">
+          <i class="fa-solid fa-pen"></i>
+        </a>
+      </td>
+
+      <td class="btn-action delete text-center">
+        <a href="#">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </td>
+
+    </tr>
+
+    <!-- LINHA 4 -->
+    <tr class="row-link">
+
+      <td class="prioridade alta cell-link">
+        <a href="detalhe.html" class="row-anchor">Abrir</a>
+      </td>
+
+      <td class="cell-link">4</td>
+      <td class="cell-link">Criar DAO de subtarefas</td>
+      <td class="cell-link">alta</td>
+      <td class="cell-link">Linus Torvalds</td>
+      <td class="cell-link">ativo</td>
+
+      <td class="btn-action edit text-center">
+        <a href="#">
+          <i class="fa-solid fa-pen"></i>
+        </a>
+      </td>
+
+      <td class="btn-action delete text-center">
+        <a href="#">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+
             <!-- PAGINAÇÃO (modelo da imagem) -->
             <div class="task-pagination2" id="paginacao">
 
@@ -224,47 +338,62 @@
             </div>
             <!-- FIM PAGINAÇÃO -->
 
-             <div id="secaoSubtarefas" class="">
-            <!-- FORM: adicionar subtarefa -->
-            <section class="mini-form">
-                <h3>Adicionar subtarefa</h3>
+            <div id="secaoSubtarefas">
 
-                <form class="form-detalhe" onsubmit="alert('salvar subtarefa'); return false;">
+                <!-- FORM: adicionar subtarefa -->
+                <section class="mini-form">
 
-                    <div class="grupo span-2">
-                        <label>Título</label>
-                        <input type="text" placeholder="Ex: Ajustar modal de edição" required>
-                    </div>
+                    <!-- HEADER -->
+                    <div class="mini-form-header">
+                        <h3>Adicionar subtarefa</h3>
 
-                    <div class="grupo">
-                        <label>Status</label>
-                        <select required>
-                            <option value="">Selecione</option>
-                            <option value="0">ativo</option>
-                            <option value="1">inativo</option>
-                        </select>
-                    </div>
-
-                    <div class="grupo">
-                        <label>Data de Conclusão</label>
-                        <input type="date">
-                    </div>
-
-                    <div class="grupo span-2">
-                        <label>Descrição</label>
-                        <textarea placeholder="Detalhes da subtarefa..."></textarea>
-                    </div>
-
-                    <div class="acoes span-2">
-                        <button class="btn-add add-subtarefa" type="submit">
-                            <i class="fa-solid fa-plus"></i>
-                            Criar Subtarefa
+                        <button 
+                            type="button" 
+                            class="btn-close"
+                            onclick="fecharSubtarefas()"
+                            >
+                            <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
 
-                </form>
-            </section>
+                    <!-- FORM -->
+                    <form class="form-detalhe" onsubmit="alert('salvar subtarefa'); return false;">
+
+                        <div class="grupo span-2">
+                            <label>Título</label>
+                            <input type="text" placeholder="Ex: Ajustar modal de edição" required>
+                        </div>
+
+                        <div class="grupo">
+                            <label>Status</label>
+                            <select required>
+                                <option value="">Selecione</option>
+                                <option value="0">ativo</option>
+                                <option value="1">inativo</option>
+                            </select>
+                        </div>
+
+                        <div class="grupo">
+                            <label>Data de Conclusão</label>
+                            <input type="date">
+                        </div>
+
+                        <div class="grupo span-2">
+                            <label>Descrição</label>
+                            <textarea placeholder="Detalhes da subtarefa..."></textarea>
+                        </div>
+
+                        <div class="acoes span-2">
+                            <button class="btn-add add-subtarefa" type="submit">
+                                <i class="fa-solid fa-plus"></i>
+                                Criar Subtarefa
+                            </button>
+                        </div>
+
+                    </form>
+                </section>
             </div>
+
 
         </main>
 
@@ -273,19 +402,125 @@
                 tela de detalhes (html simples) • mantendo identidade visual do seu projeto
             </div>
         </footer>
-<script>
-  function toggleSubtarefas() {
-    const secao = document.getElementById("secaoSubtarefas");
-    const icone = document.getElementById("iconeSubtarefas");
+        <script>
+            function toggleSubtarefas() {
+                const secao = document.getElementById("secaoSubtarefas");
+                const icone = document.getElementById("iconeSubtarefas");
 
-    const vaiAbrir = !secao.classList.contains("ativo");
+                const vaiAbrir = !secao.classList.contains("ativo");
 
-    secao.classList.toggle("ativo");
+                secao.classList.toggle("ativo");
 
-    icone.style.transform = vaiAbrir ? "rotate(90deg)" : "rotate(0deg)";
-    icone.style.transition = "transform .2s ease";
+                icone.style.transform = vaiAbrir ? "rotate(90deg)" : "rotate(0deg)";
+                icone.style.transition = "transform .2s ease";
+
+                // 👇 SCROLL AUTOMÁTICO
+                if (vaiAbrir) {
+                    setTimeout(() => {
+                        secao.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+                    }, 200); // tempo pequeno pra esperar abrir animação
+                }
+            }
+
+            function fecharSubtarefas() {
+
+                const secao = document.getElementById("secaoSubtarefas");
+                const icone = document.getElementById("iconeSubtarefas");
+
+                // remove abertura
+                secao.classList.remove("ativo");
+
+                // volta seta
+                icone.style.transform = "rotate(0deg)";
+
+                // 👇 SCROLL PRO TOPO
+                document.getElementById("sub-header")
+                        .scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+            }
+            
+
+(function () {
+  if (!document.body.classList.contains("page-detalhe")) return;
+
+  const header = document.querySelector(".detalhe-header"); // ✅ AQUI
+  const tabs   = document.querySelector(".task-tabs");
+
+  if (!header || !tabs) return;
+
+// cria um "container" interno pra centralizar o conteúdo (sem mudar teu HTML)
+if (!tabs.querySelector(".tabs-inner")) {
+  const inner = document.createElement("div");
+  inner.className = "tabs-inner";
+
+  while (tabs.firstChild) inner.appendChild(tabs.firstChild);
+  tabs.appendChild(inner);
+}
+
+  function setHeaderH() {
+    const h = header.getBoundingClientRect().height || 0;
+    document.documentElement.style.setProperty("--header-h", h + "px");
   }
-</script>
+  setHeaderH();
+  window.addEventListener("resize", setHeaderH);
+
+  const sentinel = document.createElement("div");
+  sentinel.style.height = "1px";
+  tabs.parentNode.insertBefore(sentinel, tabs);
+
+  const placeholder = document.createElement("div");
+  placeholder.style.display = "none";
+  tabs.parentNode.insertBefore(placeholder, tabs.nextSibling);
+
+function ativar() {
+  const h = tabs.getBoundingClientRect().height || 0;
+  placeholder.style.height = h + "px";
+  placeholder.style.display = "block";
+
+  tabs.classList.remove("saindo");
+  tabs.classList.add("entrando");
+  tabs.classList.add("assumir-topo");
+  header.classList.add("sumir");
+
+  requestAnimationFrame(() => {
+    tabs.classList.remove("entrando");
+  });
+}
+
+
+function desativar() {
+  // anima a saída mantendo fixed
+  tabs.classList.add("saindo");
+
+  // espera a animação terminar e só depois solta do topo
+  setTimeout(() => {
+    tabs.classList.remove("assumir-topo");
+    tabs.classList.remove("entrando");
+    tabs.classList.remove("saindo");
+
+    header.classList.remove("sumir");
+    placeholder.style.display = "none";
+  }, 200); // pode ajustar (150–300)
+}
+
+  const io = new IntersectionObserver((entries) => {
+    const ent = entries[0];
+    if (!ent.isIntersecting) ativar();
+    else desativar();
+  }, { threshold: 0 });
+
+  io.observe(sentinel);
+})();
+
+
+
+        </script>
+
 
 
     </body>

@@ -70,9 +70,6 @@
 
             </div>
 
-                
-            
-
             <table class="task-table">
 
                 <thead>
@@ -83,6 +80,7 @@
                         <th>Prioridade</th>
                         <th>Responsável</th>
                         <th>Status</th>
+                        <th>Quant. Tarefas</th>
                         <th>Editar</th>
                         <th>Excluir</th>
                     </tr>
@@ -95,7 +93,7 @@
                         List<TarefaBean> tarefas = (List<TarefaBean>) request.getAttribute("tarefas");
                         if(tarefas.isEmpty()) {%>
                             <tr>
-                                <td class="info" colspan="8">
+                                <td class="info" colspan="10">
                                     Nenhuma tarefa encontrada.
                                 </td>
                             </tr>
@@ -110,18 +108,12 @@
                             <td><%= tarefa.getPrioridade() %></td>
                             <td><%= tarefa.getResponsavel() %></td>
                             <td><%= tarefa.getStatusText()%></td>
-
+                            <td class="text-center" > <%= (int)(Math.random() * 11) %></td>
+                            
                             <td class="btn-action edit">
-                                <a href="#" onclick="editarTarefa(
-                                   <%= tarefa.getId_tarefa() %>,
-                                   '<%= tarefa.getTitulo() %>',
-                                   '<%= tarefa.getPrioridade() %>',
-                                   '<%= tarefa.getResponsavel() %>',
-                                   '<%= tarefa.getStatus() %>',
-                                   '<%= (tarefa.getDescricao()) %>'
-                                 ); return false;">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
+                              <a href="${pageContext.request.contextPath}/tarefas/confirmar-edicao?id=<%= tarefa.getId_tarefa() %>">
+                                <i class="fa-solid fa-pen"></i>
+                              </a>
                             </td>
 
                             <td class="btn-action delete">
@@ -265,16 +257,34 @@
   TarefaBean tarefaExcluir = (TarefaBean) request.getAttribute("tarefaExcluir");
   if (tarefaExcluir != null) {
 %>
-<script>
-  excluirTarefa(
-    <%= tarefaExcluir.getId_tarefa() %>,
-    '<%= js(tarefaExcluir.getTitulo()) %>',
-    '<%= js(tarefaExcluir.getPrioridade()) %>',
-    '<%= js(tarefaExcluir.getResponsavel()) %>',
-    '<%= tarefaExcluir.getStatus() %>',
-    '<%= js(tarefaExcluir.getDescricao()) %>'
-  );
-</script>
+    <script>
+      excluirTarefa(
+        <%= tarefaExcluir.getId_tarefa() %>,
+        '<%= js(tarefaExcluir.getTitulo()) %>',
+        '<%= js(tarefaExcluir.getPrioridade()) %>',
+        '<%= js(tarefaExcluir.getResponsavel()) %>',
+        '<%= tarefaExcluir.getStatus() %>',
+        '<%= js(tarefaExcluir.getDescricao()) %>'
+      );
+    </script> 
+<%
+  }
+%>
+
+<%
+  TarefaBean tarefaEdicao = (TarefaBean) request.getAttribute("tarefaEdicao");
+  if (tarefaEdicao != null) {
+%>
+    <script>
+      editarTarefa(
+        <%= tarefaEdicao.getId_tarefa() %>,
+        '<%= js(tarefaEdicao.getTitulo()) %>',
+        '<%= js(tarefaEdicao.getPrioridade()) %>',
+        '<%= js(tarefaEdicao.getResponsavel()) %>',
+        '<%= tarefaEdicao.getStatus() %>',
+        '<%= js(tarefaEdicao.getDescricao()) %>'
+      );
+    </script> 
 <%
   }
 %>

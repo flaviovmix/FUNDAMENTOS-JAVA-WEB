@@ -12,11 +12,17 @@ body {
     padding: 0;
     background: #fafafa;
     color: #222;
+    padding-bottom: 60px; /* evita o footer cobrir o conteúdo */
 }
 
 /* =======================================================================
    HEADER (usa a tag <header>, sem classe)
    ======================================================================= */
+
+.text-center {
+    text-align: center;
+}
+
 header {
     width: 100%;
     background: #1f2937;
@@ -32,25 +38,25 @@ header {
     color: #fff;
 }
 
-.btn-header {
-    display: flex;
-    gap: 15px;
-}
-
-.btn-header a {
-    text-decoration: none;  /* remove sublinhado */
-    color: inherit;         /* herda a cor do pai */
-}
-
-
-
 header h2 {
     margin: 0;
     font-size: 18px;
     font-weight: 700;
 }
 
-/* botão adicionar */
+.btn-header {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-header a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =======================================================================
+   BOTÕES
+   ======================================================================= */
 .btn-add, .btn-reset, .btn-apagar {
     color: #fff;
     border: none;
@@ -63,39 +69,22 @@ header h2 {
     gap: 6px;
 }
 
-.btn-add {
-    background: #22c55e;
-}
+.btn-add { background: #22c55e; }
+.btn-reset { background: #f97316; }
+.btn-apagar { background: #dc2626; }
 
-.btn-reset {
-    background: #f97316;
-}
-
-.btn-apagar {
-    background: #dc2626;   /* vermelho base */
-}
-
-.btn-apagar:hover {
-    background: red;  /* hover mais escuro */
-}
-
-.btn-reset:hover {
-     background: #ea580c;
-}
-
-.btn-add:hover {
-    background: #16a34a;
-}
+.btn-add:hover { background: #16a34a; }
+.btn-reset:hover { background: #ea580c; }
+.btn-apagar:hover { background: red; }
 
 /* =======================================================================
-   MAIN (container de conteúdo)
+   MAIN
    ======================================================================= */
 main {
     width: 900px;
     margin: 0 auto;
 }
 
-/* título da página */
 main h1 {
     margin: 34px 0 22px 0;
     font-size: 20px;
@@ -125,13 +114,12 @@ th {
     text-align: left;
 }
 
-/* última linha forte */
 .task-table tbody tr:last-child td {
     border-bottom: 2px solid #000;
 }
 
 /* =======================================================================
-   LINKS
+   LINKS (tabela)
    ======================================================================= */
 .task-table td a {
     color: #111;
@@ -172,16 +160,11 @@ tr > th:first-child {
     color: inherit;
 }
 
-.task-table .btn-action.edit a:hover {
-    color: #2563eb;
-}
-
-.task-table .btn-action.delete a:hover {
-    color: #dc2626;
-}
+.task-table .btn-action.edit a:hover { color: #2563eb; }
+.task-table .btn-action.delete a:hover { color: #dc2626; }
 
 /* =======================================================================
-   LINHA CLICÁVEL
+   LINHA CLICÁVEL (overlay)
    ======================================================================= */
 .row-link {
     position: relative;
@@ -191,7 +174,6 @@ tr > th:first-child {
     position: relative;
 }
 
-/* link invisível que cobre a linha inteira */
 .row-anchor {
     position: absolute;
     top: 0;
@@ -199,6 +181,8 @@ tr > th:first-child {
     width: 100%;
     height: 100%;
     z-index: 1;
+    display: block;
+    text-indent: -9999px;
 }
 
 .row-link:hover {
@@ -207,7 +191,7 @@ tr > th:first-child {
 }
 
 /* =======================================================================
-   ALERTAS
+   ALERTAS (linha)
    ======================================================================= */
 .erro {
     text-align: center;
@@ -243,9 +227,13 @@ tr > th:first-child {
     text-align: center;
 }
 
-/* evita o footer cobrir o conteúdo */
-body {
-    padding-bottom: 60px;
+/* =======================================================================
+   PAGE HEADER + BADGES
+   ======================================================================= */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .legenda-prioridade {
@@ -262,47 +250,26 @@ body {
     text-align: center;
 }
 
-/* badges lado a lado */
 .legenda-badges {
     display: flex;
     overflow: hidden;
     border-radius: 2px;
     min-width: 150px;
+    gap: 5px;
 }
 
-/* badge base */
 .badge {
     padding: 4px 10px;
     font-size: 12px;
     min-width: 50px;
+    border-radius: 4px;
     text-align: center;
     text-transform: lowercase;
 }
 
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.mini-modal {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 380px;
-    max-width: 420px;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 9999;
-    animation: slideDown 0.3s ease-out;
-}
-
+/* =======================================================================
+   FLASH / MINI-MODAL
+   ======================================================================= */
 .mini-modal {
     position: fixed;
     top: 20px;
@@ -326,20 +293,16 @@ body {
     color: #1d4ed8;
 }
 
-.mini-modal.danger {
-    background: #fee2e2;  
-    color: #991b1b;       
+.mini-modal.danger,
+.mini-modal.flashErro {
+    background: #fee2e2;
+    color: #991b1b;
     border: 1px solid #fecaca;
 }
 
 .mini-modal.sucesso {
     background: #ecfdf5;
     color: #047857;
-}
-
-.mini-modal.flashErro {
-    background: #fee2e2;   
-    color: #991b1b;   
 }
 
 .mini-modal button {
@@ -354,48 +317,13 @@ body {
     animation: slideUpOut 0.3s ease-in forwards;
 }
 
-/* animação */
 @keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -10px);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, 0);
-    }
+    from { opacity: 0; transform: translate(-50%, -10px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
 }
 
 @keyframes slideUpOut {
-    from {
-        opacity: 1;
-        transform: translate(-50%, 0);
-    }
-    to {
-        opacity: 0;
-        transform: translate(-50%, -10px);
-    }
+    from { opacity: 1; transform: translate(-50%, 0); }
+    to   { opacity: 0; transform: translate(-50%, -10px); }
 }
 
-/* 1. Define a linha como base de posicionamento */
-.row-link {
-    position: relative;
-}
-
-/* 2. Faz o link invisível esticar por toda a largura e altura da linha */
-.row-anchor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; /* Fica acima do texto, mas abaixo dos botões de ação */
-    display: block;
-    text-indent: -9999px; /* Esconde qualquer texto do link */
-}
-
-/* 3. Garante que os botões de EDITAR e EXCLUIR fiquem por cima do link da linha */
-.btn-action {
-    position: relative;
-    z-index: 2; 
-}

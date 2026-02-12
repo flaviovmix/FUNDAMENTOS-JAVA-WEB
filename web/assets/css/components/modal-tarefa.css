@@ -297,3 +297,66 @@
 .box-modal-custom.saindo {
     animation: modalFadeOut 0.2s ease forwards;
 }
+
+/* ==========================================================
+   SHAKE MODAL (clique fora bloqueado)
+   ========================================================== */
+.shake-modal {
+    animation: shakeModal 0.35s ease;
+}
+
+@keyframes shakeModal {
+
+    0%   { transform: translateX(0); }
+
+    20%  { transform: translateX(-6px); }
+
+    40%  { transform: translateX(6px); }
+
+    60%  { transform: translateX(-4px); }
+
+    80%  { transform: translateX(4px); }
+
+    100% { transform: translateX(0); }
+}
+
+/* =========================
+   ENTRADA
+   ========================= */
+@keyframes modalDropIn {
+    from {
+        opacity: 0;
+        transform: translateY(-40px); /* começa acima */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* posição final */
+    }
+}
+
+/* =========================
+   SAÍDA
+   ========================= */
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+}
+
+/* =========================
+   SHAKE
+   ========================= */
+@keyframes shakeModal {
+
+    0%   { transform: translateX(0); }
+    20%  { transform: translateX(-6px); }
+    40%  { transform: translateX(6px); }
+    60%  { transform: translateX(-4px); }
+    80%  { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+}

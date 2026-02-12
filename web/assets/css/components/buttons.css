@@ -4,6 +4,7 @@
 .btn-add,
 .btn-reset,
 .btn-apagar,
+.btn-edit,
 .btn-listar {
   color: #fff;
   border: none;
@@ -19,9 +20,11 @@
 .btn-add { background: #22c55e; }
 .btn-reset { background: #f97316; }
 .btn-apagar { background: #dc2626; }
+.btn-edit { background: #2d6ef8; }
 .btn-listar { background: #3b82f6; }
 
 .btn-add:hover { background: #16a34a; }
 .btn-reset:hover { background: #ea580c; }
 .btn-apagar:hover { background: red; }
+.btn-edit:hover { background: #1d4ed8; }
 .btn-listar:hover { background: #2563eb; }

@@ -25,16 +25,16 @@
         <title>Lista de Tarefas</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/buttons.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/flash.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/tabs.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/table.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/paginacao.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/modal-tarefa.css">
-        
-        
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/buttons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/flash.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/tabs.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/table.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/paginacao.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/modal-tarefa.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/checkbox.css">
+
     </head>
 
     <body data-context="${pageContext.request.contextPath}">
@@ -55,7 +55,7 @@
                         Apagar todos os registros
                     </a>
                 </div>
-                <h2>FUNDAMENTOS JAVA 25</h2>
+                    <h2>FUNDAMENTOS JAVA 25</h2>    
             </div>
         </header>
 
@@ -127,12 +127,14 @@
                         <th>Quant. Tarefas</th>
                         <th>Editar</th>
                         <th>Excluir</th>
+                        <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
                      
                     <%
+                        
                     try {
                         List<TarefaBean> tarefas = (List<TarefaBean>) request.getAttribute("tarefas");
                         if(tarefas.isEmpty()) {%>
@@ -164,6 +166,15 @@
                               <a href="${pageContext.request.contextPath}/tarefas/confirmar-exclusao?id=<%= tarefa.getId_tarefa() %>">
                                 <i class="fa-solid fa-trash"></i>
                               </a>
+                            </td>
+                            
+                            <td class="btn-action">
+                                <label class="alternador">
+                                  <input type="checkbox" 
+                                        <%= ((int)(Math.random() * 11)) < 5 ? "checked" : "" %>
+                                   >
+                                  <span class="alternador-slider"></span>
+                                </label>
                             </td>
 
                          </tr>

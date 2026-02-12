@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="./assets/css/components/paginacao.css">
         <link rel="stylesheet" href="./assets/css/components/box-detalhe.css">
         <link rel="stylesheet" href="./assets/css/components/mini-form.css">
-        
+        <link rel="stylesheet" href="./assets/css/components/checkbox.css">
+
     </head>
 
     <body class="page-detalhe">
@@ -31,6 +32,11 @@
                     </a>
 
                     <button class="btn-add" type="button" onclick="alert('editar (abrir modal)')">
+                        <i class="fa-solid fa-plus"></i>
+                        Nova
+                    </button>
+
+                    <button class="btn-edit" type="button" onclick="alert('editar (abrir modal)')">
                         <i class="fa-solid fa-pen"></i>
                         Editar
                     </button>
@@ -39,7 +45,7 @@
                         <i class="fa-solid fa-trash"></i>
                         Excluir
                     </button>
-                    
+
                     <a class="btn-listar" href="#sub-header">
                         <i class="fa-solid fa-list"></i>
                         Lista de subtarefas
@@ -144,167 +150,310 @@
 
             <!-- GUIAS / FILTRO DE TAREFAS -->
             <div class="task-tabs">
-                <!-- Para começar: deixa "Todos" ativo -->
+
+                <!-- INDICADOR DESLIZANTE -->
+                <div class="tab-indicator"></div>
+
+                <!-- TAB 1 -->
                 <a href="#" class="task-tab active" data-tab="todos">
                     <i class="fa-solid fa-list"></i>
                     Todos
                 </a>
 
+                <!-- TAB 2 -->
                 <a href="#" class="task-tab" data-tab="ativas">
                     <i class="fa-solid fa-circle-check"></i>
                     Ativas
                 </a>
 
+                <!-- TAB 3 -->
                 <a href="#" class="task-tab" data-tab="inativas">
                     <i class="fa-solid fa-circle-pause"></i>
                     Inativas
                 </a>
 
+                <!-- TAB 4 -->
                 <a href="#" class="task-tab" data-tab="pendentes">
                     <i class="fa-solid fa-hourglass-half"></i>
                     Pendentes
                 </a>
 
+                <!-- TAB 5 -->
                 <a href="#" class="task-tab" data-tab="rascunho">
                     <i class="fa-solid fa-file-pen"></i>
                     Rascunho
                 </a>
 
+                <!-- TAB 6 -->
                 <a href="#" class="task-tab" data-tab="excluidas">
                     <i class="fa-solid fa-trash"></i>
                     Excluídas
                 </a>
 
             </div>
+
             <!-- FIM GUIAS -->
 
             <table class="task-table">
 
-  <thead>
-    <tr>
-      <th></th>
-      <th>ID</th>
-      <th>Título</th>
-      <th>Prioridade</th>
-      <th>Responsável</th>
-      <th>Status</th>
-      <th class="text-center">Editar</th>
-      <th class="text-center">Excluir</th>
-    </tr>
-  </thead>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Prioridade</th>
+                        <th>Responsável</th>
+                        <th>Status</th>
+                        <th class="text-center">Editar</th>
+                        <th class="text-center">Excluir</th>
+                        <th></th>
+                    </tr>
+                </thead>
 
-  <tbody>
+                <tbody>
 
-    <!-- LINHA 1 -->
-    <tr class="row-link">
+                    <tr class="row-link">
+                        <td class="prioridade baixa cell-link">
+                            <a href="detalhe.html?id=10" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">10</td>
+                        <td class="cell-link">Desativar tarefa</td>
+                        <td class="cell-link">baixa</td>
+                        <td class="cell-link">Satya Nadella</td>
+                        <td class="cell-link">inativo</td>
 
-      <td class="prioridade alta cell-link">
-        <a href="detalhe.html" class="row-anchor">Abrir</a>
-      </td>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox">
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-      <td class="cell-link">1</td>
-      <td class="cell-link">Criar interface de tarefas</td>
-      <td class="cell-link">alta</td>
-      <td class="cell-link">Steve Jobs</td>
-      <td class="cell-link">ativo</td>
+                    <tr class="row-link">
+                        <td class="prioridade media cell-link">
+                            <a href="detalhe.html?id=9" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">9</td>
+                        <td class="cell-link">Editar tarefa</td>
+                        <td class="cell-link">media</td>
+                        <td class="cell-link">Sundar Pichai</td>
+                        <td class="cell-link">ativo</td>
 
-      <td class="btn-action edit text-center">
-        <a href="#">
-          <i class="fa-solid fa-pen"></i>
-        </a>
-      </td>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox" checked>
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-      <td class="btn-action delete text-center">
-        <a href="#">
-          <i class="fa-solid fa-trash"></i>
-        </a>
-      </td>
+                    <tr class="row-link">
+                        <td class="prioridade baixa cell-link">
+                            <a href="detalhe.html?id=8" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">8</td>
+                        <td class="cell-link">Resolver o problema de CSS</td>
+                        <td class="cell-link">baixa</td>
+                        <td class="cell-link">Tim Cook</td>
+                        <td class="cell-link">ativo</td>
 
-    </tr>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox" checked>
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-    <!-- LINHA 2 -->
-    <tr class="row-link">
+                    <tr class="row-link">
+                        <td class="prioridade media cell-link">
+                            <a href="detalhe.html?id=7" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">7</td>
+                        <td class="cell-link">Deletar uma tarefa</td>
+                        <td class="cell-link">media</td>
+                        <td class="cell-link">Sergey Brin</td>
+                        <td class="cell-link">ativo</td>
 
-      <td class="prioridade media cell-link">
-        <a href="detalhe.html" class="row-anchor">Abrir</a>
-      </td>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox" checked>
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-      <td class="cell-link">2</td>
-      <td class="cell-link">Implementar paginação</td>
-      <td class="cell-link">média</td>
-      <td class="cell-link">Bill Gates</td>
-      <td class="cell-link">ativo</td>
+                    <tr class="row-link">
+                        <td class="prioridade alta cell-link">
+                            <a href="detalhe.html?id=6" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">6</td>
+                        <td class="cell-link">Tratamento de erros</td>
+                        <td class="cell-link">alta</td>
+                        <td class="cell-link">Jeff Bezos</td>
+                        <td class="cell-link">ativo</td>
 
-      <td class="btn-action edit text-center">
-        <a href="#">
-          <i class="fa-solid fa-pen"></i>
-        </a>
-      </td>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox" checked>
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-      <td class="btn-action delete text-center">
-        <a href="#">
-          <i class="fa-solid fa-trash"></i>
-        </a>
-      </td>
+                    <tr class="row-link">
+                        <td class="prioridade media cell-link">
+                            <a href="detalhe.html?id=5" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">5</td>
+                        <td class="cell-link">Entendendo Bean e DAO</td>
+                        <td class="cell-link">media</td>
+                        <td class="cell-link">Larry Page</td>
+                        <td class="cell-link">ativo</td>
 
-    </tr>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox">
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-    <!-- LINHA 3 -->
-    <tr class="row-link">
+                    <tr class="row-link">
+                        <td class="prioridade alta cell-link">
+                            <a href="detalhe.html?id=4" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">4</td>
+                        <td class="cell-link">Criando um Pool de Conexões</td>
+                        <td class="cell-link">alta</td>
+                        <td class="cell-link">Elon Musk</td>
+                        <td class="cell-link">ativo</td>
 
-      <td class="prioridade baixa cell-link">
-        <a href="detalhe.html" class="row-anchor">Abrir</a>
-      </td>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox" checked>
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-      <td class="cell-link">3</td>
-      <td class="cell-link">Ajustar modal de edição</td>
-      <td class="cell-link">baixa</td>
-      <td class="cell-link">Ada Lovelace</td>
-      <td class="cell-link">inativo</td>
+                    <tr class="row-link">
+                        <td class="prioridade alta cell-link">
+                            <a href="detalhe.html?id=3" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">3</td>
+                        <td class="cell-link">Listar tarefas na interface</td>
+                        <td class="cell-link">alta</td>
+                        <td class="cell-link">Mark Zuckerberg</td>
+                        <td class="cell-link">ativo</td>
 
-      <td class="btn-action edit text-center">
-        <a href="#">
-          <i class="fa-solid fa-pen"></i>
-        </a>
-      </td>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox" checked>
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-      <td class="btn-action delete text-center">
-        <a href="#">
-          <i class="fa-solid fa-trash"></i>
-        </a>
-      </td>
+                    <tr class="row-link">
+                        <td class="prioridade media cell-link">
+                            <a href="detalhe.html?id=2" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">2</td>
+                        <td class="cell-link">Criar banco de dados</td>
+                        <td class="cell-link">media</td>
+                        <td class="cell-link">Bill Gates</td>
+                        <td class="cell-link">ativo</td>
 
-    </tr>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox" checked>
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-    <!-- LINHA 4 -->
-    <tr class="row-link">
+                    <tr class="row-link">
+                        <td class="prioridade alta cell-link">
+                            <a href="detalhe.html?id=1" class="row-anchor">Abrir</a>
+                        </td>
+                        <td class="cell-link">1</td>
+                        <td class="cell-link">Criar a Interface</td>
+                        <td class="cell-link">alta</td>
+                        <td class="cell-link">Steve Jobs</td>
+                        <td class="cell-link">ativo</td>
 
-      <td class="prioridade alta cell-link">
-        <a href="detalhe.html" class="row-anchor">Abrir</a>
-      </td>
+                        <td class="btn-action edit text-center">
+                            <a href="#"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td class="btn-action delete text-center">
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="btn-action">
+                            <label class="alternador">
+                                <input type="checkbox" checked>
+                                <span class="alternador-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
 
-      <td class="cell-link">4</td>
-      <td class="cell-link">Criar DAO de subtarefas</td>
-      <td class="cell-link">alta</td>
-      <td class="cell-link">Linus Torvalds</td>
-      <td class="cell-link">ativo</td>
-
-      <td class="btn-action edit text-center">
-        <a href="#">
-          <i class="fa-solid fa-pen"></i>
-        </a>
-      </td>
-
-      <td class="btn-action delete text-center">
-        <a href="#">
-          <i class="fa-solid fa-trash"></i>
-        </a>
-      </td>
-
-    </tr>
-
-  </tbody>
-</table>
+                </tbody>
+            </table>
 
 
             <!-- PAGINAÇÃO (modelo da imagem) -->
@@ -397,11 +546,6 @@
 
         </main>
 
-        <footer class="footer">
-            <div class="footer-inner">
-                tela de detalhes (html simples) • mantendo identidade visual do seu projeto
-            </div>
-        </footer>
         <script>
             function toggleSubtarefas() {
                 const secao = document.getElementById("secaoSubtarefas");
@@ -443,79 +587,125 @@
                             block: "start"
                         });
             }
-            
 
-(function () {
-  if (!document.body.classList.contains("page-detalhe")) return;
 
-  const header = document.querySelector(".detalhe-header"); // ✅ AQUI
-  const tabs   = document.querySelector(".task-tabs");
+            (function () {
+                if (!document.body.classList.contains("page-detalhe"))
+                    return;
 
-  if (!header || !tabs) return;
+                const header = document.querySelector(".detalhe-header"); // ✅ AQUI
+                const tabs = document.querySelector(".task-tabs");
+
+                if (!header || !tabs)
+                    return;
 
 // cria um "container" interno pra centralizar o conteúdo (sem mudar teu HTML)
-if (!tabs.querySelector(".tabs-inner")) {
-  const inner = document.createElement("div");
-  inner.className = "tabs-inner";
+                if (!tabs.querySelector(".tabs-inner")) {
+                    const inner = document.createElement("div");
+                    inner.className = "tabs-inner";
 
-  while (tabs.firstChild) inner.appendChild(tabs.firstChild);
-  tabs.appendChild(inner);
-}
+                    while (tabs.firstChild)
+                        inner.appendChild(tabs.firstChild);
+                    tabs.appendChild(inner);
+                }
 
-  function setHeaderH() {
-    const h = header.getBoundingClientRect().height || 0;
-    document.documentElement.style.setProperty("--header-h", h + "px");
-  }
-  setHeaderH();
-  window.addEventListener("resize", setHeaderH);
+                function setHeaderH() {
+                    const h = header.getBoundingClientRect().height || 0;
+                    document.documentElement.style.setProperty("--header-h", h + "px");
+                }
+                setHeaderH();
+                window.addEventListener("resize", setHeaderH);
 
-  const sentinel = document.createElement("div");
-  sentinel.style.height = "1px";
-  tabs.parentNode.insertBefore(sentinel, tabs);
+                const sentinel = document.createElement("div");
+                sentinel.style.height = "1px";
+                tabs.parentNode.insertBefore(sentinel, tabs);
 
-  const placeholder = document.createElement("div");
-  placeholder.style.display = "none";
-  tabs.parentNode.insertBefore(placeholder, tabs.nextSibling);
+                const placeholder = document.createElement("div");
+                placeholder.style.display = "none";
+                tabs.parentNode.insertBefore(placeholder, tabs.nextSibling);
 
-function ativar() {
-  const h = tabs.getBoundingClientRect().height || 0;
-  placeholder.style.height = h + "px";
-  placeholder.style.display = "block";
+                function ativar() {
+                    const h = tabs.getBoundingClientRect().height || 0;
+                    placeholder.style.height = h + "px";
+                    placeholder.style.display = "block";
 
-  tabs.classList.remove("saindo");
-  tabs.classList.add("entrando");
-  tabs.classList.add("assumir-topo");
-  header.classList.add("sumir");
+                    tabs.classList.remove("saindo");
+                    tabs.classList.add("entrando");
+                    tabs.classList.add("assumir-topo");
+                    header.classList.add("sumir");
 
-  requestAnimationFrame(() => {
-    tabs.classList.remove("entrando");
-  });
-}
+                    requestAnimationFrame(() => {
+                        tabs.classList.remove("entrando");
+                    });
+                }
 
 
-function desativar() {
-  // anima a saída mantendo fixed
-  tabs.classList.add("saindo");
+                function desativar() {
+                    // anima a saída mantendo fixed
+                    tabs.classList.add("saindo");
 
-  // espera a animação terminar e só depois solta do topo
-  setTimeout(() => {
-    tabs.classList.remove("assumir-topo");
-    tabs.classList.remove("entrando");
-    tabs.classList.remove("saindo");
+                    // espera a animação terminar e só depois solta do topo
+                    setTimeout(() => {
+                        tabs.classList.remove("assumir-topo");
+                        tabs.classList.remove("entrando");
+                        tabs.classList.remove("saindo");
 
-    header.classList.remove("sumir");
-    placeholder.style.display = "none";
-  }, 200); // pode ajustar (150–300)
-}
+                        header.classList.remove("sumir");
+                        placeholder.style.display = "none";
+                    }, 200); // pode ajustar (150–300)
+                }
 
-  const io = new IntersectionObserver((entries) => {
-    const ent = entries[0];
-    if (!ent.isIntersecting) ativar();
-    else desativar();
-  }, { threshold: 0 });
+                const io = new IntersectionObserver((entries) => {
+                    const ent = entries[0];
+                    if (!ent.isIntersecting)
+                        ativar();
+                    else
+                        desativar();
+                }, {threshold: 0});
 
-  io.observe(sentinel);
-})();
+                io.observe(sentinel);
+            })();
+
+
+
+
+
+
+
+
+            const tabs = document.querySelectorAll('.task-tab');
+            const indicator = document.querySelector('.tab-indicator');
+
+            function moveIndicator(tab) {
+                const rect = tab.getBoundingClientRect();
+                const parentRect = tab.parentElement.getBoundingClientRect();
+
+                const width = rect.width;
+                const left = rect.left - parentRect.left;
+
+                indicator.style.width = width + 'px';
+                indicator.style.transform = `translateX(${left}px)`;
+            }
+
+            /* clique nas tabs */
+            tabs.forEach(tab => {
+                tab.addEventListener('click', e => {
+                    e.preventDefault();
+
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    moveIndicator(tab);
+                });
+            });
+
+            /* posição inicial */
+            window.addEventListener('load', () => {
+                const active = document.querySelector('.task-tab.active');
+                if (active)
+                    moveIndicator(active);
+            });
+
 
 
 
@@ -525,3 +715,4 @@ function desativar() {
 
     </body>
 </html>
+

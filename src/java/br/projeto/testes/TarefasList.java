@@ -29,7 +29,7 @@ public class TarefasList extends RootServlet {
             String caminhoAplicacao = request.getContextPath();
             
             resposta.print(LayoutCSS.toHtml(caminhoAplicacao));
-            resposta.print(Tabs.toHtml());
+            //resposta.print(Tabs.toHtml());
             
             String vazio = ("""
                 <tr>
@@ -46,6 +46,7 @@ public class TarefasList extends RootServlet {
                 tarefa = vazio;    
             }
             
+            //resposta.print(Dashboard.toHtml());
             resposta.print(TarefaExtruturaTabela.html(tarefa));
             
             resposta.print(Paginacao.toHtml());

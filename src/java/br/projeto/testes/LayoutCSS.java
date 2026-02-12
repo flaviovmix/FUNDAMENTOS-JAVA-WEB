@@ -22,6 +22,7 @@ public class LayoutCSS {
             <link rel="stylesheet" href="%1$s/assets/css/components/paginacao.css">
             <link rel="stylesheet" href="%1$s/assets/css/components/tabs.css">
             <link rel="stylesheet" href="%1$s/assets/css/components/modal-tarefa.css">
+            <link rel="stylesheet" href="%1$s/assets/css/components/dashboard.css">
 
             <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -58,21 +59,7 @@ public class LayoutCSS {
 
             <main>
 
-            <div class="page-header">
 
-                <h1>LISTA DE TAREFAS</h1>
-
-                <div class="legenda-prioridade">
-                    <span class="legenda-label">níveis de prioridade</span>
-
-                    <div class="legenda-badges">
-                        <span class="badge baixa">baixa</span>
-                        <span class="badge media">média</span>
-                        <span class="badge alta">alta</span>
-                    </div>
-                </div>
-
-            </div>
             """.formatted(contextPath));
         
         return aux.toString();

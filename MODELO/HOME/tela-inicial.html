@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/index-claro.css">
+  <link rel="stylesheet" href="./assets/css/normalize.css">
+  <link rel="stylesheet" href="./assets/css/sidebar.css">
+  <link rel="stylesheet" href="./assets/css/dashboard.css">
+  <link rel="stylesheet" href="./assets/css/contatos.css">
+</head>
+
+<body>
+
+  
+  
+    <main class="main-content" id="main">
+
+      <div class="dashboard-container">
+
+        <div class="dashboard-grid">
+          <div class="dashboard-card">
+            <div class="dashboard-icon" style="background-color:#2ecc71;">
+              <i class="fa-solid fa-list"></i>
+            </div>
+            <h5 class="card-title">Tarefas</h5>
+            <p class="card-text">Organize aqui suas atividades.</p>
+            <a href="#" class="dashboard-btn"
+              style="border:2px solid #2ecc71; color:#2ecc71; background:transparent; transition:0.3s;"
+              onmouseover="this.style.background='#2ecc71'; this.style.color='#fff';"
+              onmouseout="this.style.background='transparent'; this.style.color='#2ecc71';"
+              onclick="clearInput();ajaxURL('db05abc2cd78d92b6136740811d416fe.jsap', 1, 1, 1);">Acessar</a>
+          </div>
+          
+          <div class="dashboard-card">
+            <div class="dashboard-icon" style="background-color:#9b59b6;">
+              <i class="fa-solid fa-person-running"></i>
+            </div>
+            <h5 class="card-title">Atletas</h5>
+            <p class="card-text">Lista de atletas.</p>
+            <a href="#" class="dashboard-btn"
+              style="border:2px solid #9b59b6; color:#9b59b6; background:transparent; transition:0.3s;"
+              onmouseover="this.style.background='#9b59b6'; this.style.color='#fff';"
+              onmouseout="this.style.background='transparent'; this.style.color='#9b59b6';" onclick="">Acessar</a>
+          </div>
+          
+          <div class="dashboard-card">
+            <div class="dashboard-icon" style="background-color:#ffb37a;">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <h5 class="card-title">Usuários</h5>
+            <p class="card-text">Lista de usuários.</p>
+            <a href="#" class="dashboard-btn"
+              style="border:2px solid #ffb37a; color:#ffb37a; background:transparent; transition:0.3s;"
+              onmouseover="this.style.background='#ffb37a'; this.style.color='#fff';"
+              onmouseout="this.style.background='transparent'; this.style.color='#ffb37a';" onclick="">Acessar</a>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </main>
+
+    <script src="./assets/js/menu-usuario.js"></script>
+    <script src="./assets/js/sidebar.js"></script>
+
+
+
+</body>
+
+</html>

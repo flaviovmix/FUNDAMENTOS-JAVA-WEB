@@ -1,0 +1,51 @@
+:root {
+     --ativo: #1f2937;
+     --inativo: #e5e7eb;
+     --bolinha: #ffffff;
+}
+
+/* ============================
+     SWITCH PERSONALIZADO
+ ============================ */
+ .alternador {
+     position: relative;
+     width: 45px;     /* ↓ menor */
+     height: 22px;    /* ↓ menor */
+     display: inline-block;
+}
+
+.alternador input {
+     opacity: 0;
+     width: 0;
+     height: 0;
+}
+
+.alternador-slider {
+     position: absolute;
+     inset: 0;
+     background: var(--inativo);
+     border-radius: 99px;
+     cursor: pointer;
+     transition: .25s;
+}
+
+.alternador-slider::before {
+     content: "";
+     position: absolute;
+     height: 18px;   /* ↓ menor */
+     width: 18px;    /* ↓ menor */
+     left: 3px;
+     top: 2px;
+     background: var(--bolinha);
+     border-radius: 50%;
+     transition: .25s;
+}
+
+/* quando marcado */
+.alternador input:checked + .alternador-slider {
+     background: var(--ativo);
+}
+
+.alternador input:checked + .alternador-slider::before {
+     transform: translateX(22px);  
+}

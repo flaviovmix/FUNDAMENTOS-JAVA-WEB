@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Detalhes da Tarefa</title>
+
+        <!-- Fonte Inter (mais confiável que @import) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="./assets/css/base.css">
+        <link rel="stylesheet" href="./assets/css/layout.css">
+        <link rel="stylesheet" href="./assets/css/components/buttons.css">
+        <link rel="stylesheet" href="./assets/css/components/table.css">
+        <link rel="stylesheet" href="./assets/css/components/tabs.css">
+        <link rel="stylesheet" href="./assets/css/components/paginacao.css">
+        <link rel="stylesheet" href="./assets/css/components/box-detalhe.css">
+        <link rel="stylesheet" href="./assets/css/components/mini-form.css">
+        <link rel="stylesheet" href="./assets/css/components/checkbox.css">
+
+        <link rel="stylesheet" href="./assets/css/dashboard.css">
+
+    </head>
+
+    <body class="page-detalhe">
+
+        <header class="detalhe-header">
+            <div class="header-inner">
+                <div class="btn-header">
+                    <a class="btn-reset" href="tarefas/listar">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Voltar
+                    </a>
+
+                    <button class="btn-add" type="button" onclick="alert('editar (abrir modal)')">
+                        <i class="fa-solid fa-plus"></i>
+                        Nova
+                    </button>
+
+                    <button class="btn-edit" type="button" onclick="alert('editar (abrir modal)')">
+                        <i class="fa-solid fa-pen"></i>
+                        Editar
+                    </button>
+
+                    <button class="btn-apagar" type="button" onclick="alert('excluir')">
+                        <i class="fa-solid fa-trash"></i>
+                        Excluir
+                    </button>
+
+                    <a class="btn-listar" href="#sub-header">
+                        <i class="fa-solid fa-list"></i>
+                        Lista de subtarefas
+                    </a>
+                </div>
+
+                <h2>FUNDAMENTOS JAVA 25</h2>
+            </div>
+        </header>
+
+        <main>
+
+            <div class="dashboard-container">
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="dashboard-icon" style="background-color:#2ecc71;">
+                            <i class="fa-solid fa-list"></i>
+                        </div>
+                        <h5 class="card-title">Tarefas</h5>
+                        <p class="card-text">Organize aqui suas atividades.</p>
+                        <a href="#" class="dashboard-btn"
+                           style="border:2px solid #2ecc71; color:#2ecc71; background:transparent; transition:0.3s;"
+                           onmouseover="this.style.background = '#2ecc71'; this.style.color = '#fff';"
+                           onmouseout="this.style.background = 'transparent'; this.style.color = '#2ecc71';"
+                           onclick="clearInput();ajaxURL('db05abc2cd78d92b6136740811d416fe.jsap', 1, 1, 1);">Acessar</a>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-icon" style="background-color:#2ecc71;">
+                            <i class="fa-solid fa-list"></i>
+                        </div>
+                        <h5 class="card-title">Tarefas</h5>
+                        <p class="card-text">Organize aqui suas atividades.</p>
+                        <a href="#" class="dashboard-btn"
+                           style="border:2px solid #2ecc71; color:#2ecc71; background:transparent; transition:0.3s;"
+                           onmouseover="this.style.background = '#2ecc71'; this.style.color = '#fff';"
+                           onmouseout="this.style.background = 'transparent'; this.style.color = '#2ecc71';"
+                           onclick="clearInput();ajaxURL('db05abc2cd78d92b6136740811d416fe.jsap', 1, 1, 1);">Acessar</a>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-icon" style="background-color:#2ecc71;">
+                            <i class="fa-solid fa-list"></i>
+                        </div>
+                        <h5 class="card-title">Tarefas</h5>
+                        <p class="card-text">Organize aqui suas atividades.</p>
+                        <a href="#" class="dashboard-btn"
+                           style="border:2px solid #2ecc71; color:#2ecc71; background:transparent; transition:0.3s;"
+                           onmouseover="this.style.background = '#2ecc71'; this.style.color = '#fff';"
+                           onmouseout="this.style.background = 'transparent'; this.style.color = '#2ecc71';"
+                           onclick="clearInput();
+                      ajaxURL('db05abc2cd78d92b6136740811d416fe.jsap', 1, 1, 1);">Acessar</a>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </main>
+
+
+
+
+
+    </body>
+
+</html>

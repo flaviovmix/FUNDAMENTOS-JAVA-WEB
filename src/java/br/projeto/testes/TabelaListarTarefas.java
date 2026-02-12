@@ -18,7 +18,7 @@ public class TabelaListarTarefas {
             aux.append("""
             <tr class="row-link">
 
-                <td class="prioridade baixa cell-link">
+                <td class="prioridade %s cell-link">
                     <a href="detalhe.html?id=%d" class="row-anchor">Abrir</a>
                 </td>
 
@@ -45,6 +45,7 @@ public class TabelaListarTarefas {
 
             </tr>
             """.formatted(
+                    tarefa.getPrioridade(),
                     tarefa.getId_tarefa(),
                     tarefa.getId_tarefa(),
                     tarefa.getTitulo(),

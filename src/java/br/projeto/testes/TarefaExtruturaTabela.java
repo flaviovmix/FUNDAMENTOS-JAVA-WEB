@@ -9,6 +9,22 @@ public class TarefaExtruturaTabela {
         StringBuilder aux = new StringBuilder();
         
         aux.append("""
+                   
+            <div class="page-header">
+                                          
+                <h1>LISTA DE TAREFAS</h1>
+
+                <div class="legenda-prioridade">
+                    <span class="legenda-label">níveis de prioridade</span>
+
+                    <div class="legenda-badges">
+                        <span class="badge baixa">baixa</span>
+                        <span class="badge media">média</span>
+                        <span class="badge alta">alta</span>
+                    </div>
+                </div>
+
+            </div>
             <table class="task-table">
 
                 <thead>
@@ -30,7 +46,7 @@ public class TarefaExtruturaTabela {
                 </tbody>
 
             </table>
-            """.formatted(tarefa), 
+            """.formatted(tarefa)
         );
         
         return aux.toString();
